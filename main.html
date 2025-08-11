@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechatronics Engineering - Department</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Section */
+        .header-banner {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><rect fill="%23333" width="1200" height="300"/><g fill="%23666"><circle cx="200" cy="100" r="50" opacity="0.3"/><circle cx="400" cy="150" r="30" opacity="0.4"/><circle cx="600" cy="80" r="40" opacity="0.3"/><circle cx="800" cy="200" r="35" opacity="0.4"/><circle cx="1000" cy="120" r="45" opacity="0.3"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 60px;
+        }
+
+        .header-title {
+            background-color: rgba(103, 58, 183, 0.95);
+            color: white;
+            padding: 20px 40px;
+            font-size: 36px;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            flex: 2;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #f8f9fa;
+            padding: 0;
+        }
+
+        /* Overview Section */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+        }
+
+        .section-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Dynamic Content Styles */
+        .dynamic-content {
+            min-height: 400px;
+        }
+
+        .content-section {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-section.active-content {
+            opacity: 1;
+        }
+
+        .section-content ol {
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .section-content ol li {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Active Sidebar Item */
+        .sidebar-item-static.active {
+            background-color: #673ab7;
+            color: white;
+        }
+
+        .sidebar-item-static.active:hover {
+            background-color: #673ab7;
+            color: white;
+        }
+
+        /* Card Container - Full Width */
+        .card-container-section {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+
+        .card-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border: 2px solid #673ab7;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .card:hover:before {
+            background: rgba(103, 58, 183, 0.7);
+        }
+
+        /* Individual card backgrounds */
+        .card:nth-child(1) {
+            background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');
+        }
+
+        .card:nth-child(2) {
+            background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');
+        }
+
+        .card:nth-child(3) {
+            background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');
+        }
+
+        .card:nth-child(4) {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
+        }
+
+        .card:nth-child(5) {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
+        }
+
+        .card:nth-child(6) {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
+        }
+
+        .card:nth-child(7) {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
+        }
+
+        .card:nth-child(8) {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(103, 58, 183, 0.4);
+        }
+
+        .card:hover h3 {
+            transform: scale(1.1);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+
+        /* Sidebar Sections - Static Style */
+        .sidebar-section {
+            background-color: white;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .sidebar-title-static {
+            background-color: #6c757d;
+            color: white;
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .sidebar-content-static {
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar-item-static {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item-static:hover {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .sidebar-item-static:last-child {
+            border-bottom: none;
+        }
+
+        /* Programmes Section */
+        .programmes-section {
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        .programmes-header {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+        }
+
+        .programme-section {
+            background-color: #673ab7;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .programme-tabs {
+            display: flex;
+            background-color: #673ab7;
+            justify-content: center;
+        }
+
+        .programme-tab {
+            padding: 15px 80px;
+            text-align: center;
+            background-color: #673ab7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .programme-tab.active {
+            background-color: #e1bee7;
+            color: #673ab7;
+        }
+
+        .programme-tab:hover:not(.active) {
+            background-color: #7b1fa2;
+        }
+
+        .programme-content {
+            background-color: white;
+            padding: 0;
+            border: 2px solid #673ab7;
+            margin: 0;
+        }
+
+        .programme-title-bar {
+            background-color: #e1bee7;
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+       
+        .programme-title-bar-dup{
+            background-color: white;
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        .programme-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            background-color: white;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .detail-section {
+            padding: 0;
+        }
+
+        .detail-section h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .detail-section p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .eligibility-syllabus {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .eligibility-section,
+        .syllabus-section {
+            background-color: white;
+            padding: 0;
+        }
+
+        .eligibility-section h4,
+        .syllabus-section h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .eligibility-section p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .syllabus-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .syllabus-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .syllabus-btn:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+        }
+
+        .higher-studies {
+            background-color: white;
+            padding: 20px;
+            border-top: none;
+        }
+
+        .higher-studies h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .higher-studies p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 28px;
+                padding: 15px 25px;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 25px 15px;
+            }
+
+            .card h3 {
+                font-size: 18px;
+            }
+
+            .programme-tab {
+                font-size: 16px;
+                padding: 12px 15px;
+            }
+
+            .programme-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .eligibility-syllabus {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <div class="header-title">Mechatronics Engineering</div>
+    </div>
+
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Main content will be populated based on sidebar selection -->
+                <div class="dynamic-content">
+                    <div class="section overview-section active-content" id="overview-content">
+                        <h2 class="section-title">Overview</h2>
+                        <div class="section-content">
+                            <p>The Mechatronics Engineering department was started in the year 2012. The department offers four year B.E. Mechatronics Engineering. The department has a team of highly qualified, dedicated and motivated faculty members and well equipped laboratories. The field of Mechatronics encompasses Robotics and Automation, Machine Vision, Rapid Prototyping, Hydraulics and Pneumatics, Automotive Electronics, Sensors and Instrumentation, Intelligent Systems and Real Time Embedded System which are fast growing technologies that enable the development of automation in the modern knowledgeable society.</p>
+                        </div>
+                    </div>
+
+                    <div class="section vision-section content-section" id="vision-content" style="display: none;">
+                        <h2 class="section-title">Vision</h2>
+                        <div class="section-content">
+                            <p>To prepare students to achieve academic excellence in the field of Mechatronics education, research and innovative product development.</p>
+                        </div>
+                    </div>
+
+                    <div class="section mission-section content-section" id="mission-content" style="display: none;">
+                        <h2 class="section-title">Mission</h2>
+                        <div class="section-content">
+                            <ol>
+                                <li>i. To provide pedagogical expertise to disseminate technical knowledge.</li>
+                                <li>ii. To foster continuous learning and research by establishing state of the art facilities.</li>
+                                <li>iii. Exposure to the latest technologies through industry-institute interaction.</li>
+                                <li>iv. Nurturing the innovation to develop interdisciplinary projects.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="section peo-section content-section" id="peo-content" style="display: none;">
+                        <h2 class="section-title">Programme Educational Objectives (PEO)</h2>
+                        <div class="section-content">
+                            <ol>
+                                <li>i. Graduates possess adequate knowledge on mechanical, electronics and electrical engineering to solve problems pertaining to mechatronics</li>
+                                <li>ii. Graduates are capable of integrating and using systems or devices incorporating information technologies and modern engineering tools for product design, development and manufacturing</li>
+                                <li>iii. Graduates aspire for higher studies and can reveal professional interaction and work effectively on multi-disciplinary teams along with professional and ethical responsibility</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Overview Section with Sub-items -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Overview</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static" onclick="showContent('overview-content')" data-content="overview">▷ About</a>
+                        <a href="#" class="sidebar-item-static" onclick="showContent('vision-content')" data-content="vision">▷ Vision</a>
+                        <a href="#" class="sidebar-item-static" onclick="showContent('mission-content')" data-content="mission">▷ Mission</a>
+                        <a href="#" class="sidebar-item-static" onclick="showContent('peo-content')" data-content="peo">▷ PEO</a>
+                    </div>
+                </div>
+
+                <!-- Faculty & Staff Section -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Faculty & Staff</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static">▷ List of Faculty Members</a>
+                        <a href="#" class="sidebar-item-static">▷ Supporting Staff</a>
+                        <a href="#" class="sidebar-item-static">▷ Awards and Recognitions</a>
+                        <a href="#" class="sidebar-item-static">▷ Faculty Members Pursuing Ph.D</a>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Section -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Infrastructure</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static">▷ Laboratory</a>
+                    </div>
+                </div>
+
+                <!-- Research & Consultancy Section -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Research & Consultancy</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static">▷ Funded Projects</a>
+                        <a href="#" class="sidebar-item-static">▷ MoU Signed</a>
+                        <a href="#" class="sidebar-item-static">▷ Consultancy Services</a>
+                        <a href="#" class="sidebar-item-static">▷ List of Publications</a>
+                        <a href="#" class="sidebar-item-static">▷ Societies and Chapters</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Container - Full Width Section -->
+    <div class="card-container-section">
+        <div class="card-container">
+            <div class="card" style="background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');" onclick="window.location.href='infrastructure.html';">
+                <h3>Infra</h3>
+            </div>
+            <div class="card" style="background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');" onclick="window.location.href='acheivements.html';">
+                <h3>Achievements</h3>
+            </div>
+            <div class="card" style="background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');" onclick="window.location.href='placements.html';">
+                <h3>Placements</h3>
+            </div>
+            <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='internships.html';">
+                <h3>Internships</h3>
+            </div>
+            <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='higher-studies.html';">
+                <h3>Higher Studies</h3>
+            </div>
+            <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                <h3>Products Developed</h3>
+            </div>
+            <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                <h3>Notable Alumni</h3>
+            </div>
+            <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                <h3>Patents</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Programmes Section -->
+        <div class="programmes-section">
+            <h1 class="programmes-header">Programmes Offered</h1>
+           
+            <div class="programme-section">
+                <div class="programme-tabs">
+                    <button class="programme-tab active">UG</button>
+                </div>
+               
+                <div class="programme-content">
+                   
+                    <div class="programme-title-bar-dup">
+                     </div>
+                   
+                    <div class="programme-title-bar">
+                        B.E. - MECHATRONICS ENGINEERING
+                    </div>
+                   
+                    <div class="programme-details">
+                        <div class="detail-section">
+                            <h4>Duration:</h4>
+                            <p>4 years (Regular) / 3 years (Lateral Entry)</p>
+                        </div>
+                        <div class="detail-section">
+                            <h4>No. of Semesters:</h4>
+                            <p>8 (Regular) / 6 (Lateral Entry)</p>
+                        </div>
+                        <div class="detail-section">
+                            <h4>No. of Seats:</h4>
+                            <p>Total - 60 (NRI Approval Status - Yes, PIO/FN/GULF quota/OCI Approval Status - Yes)</p>
+                        </div>
+                    </div>
+                   
+                    <div class="eligibility-syllabus">
+                        <div class="eligibility-section">
+                            <h4>Eligibility:</h4>
+                            <p>10+2 system of education. Must have secured a pass in Physics, Chemistry and Mathematics in the qualifying examination</p>
+                        </div>
+                        <div class="syllabus-section">
+                            <h4>Syllabus:</h4>
+                            <div class="syllabus-buttons">
+                                <button class="syllabus-btn">2015</button>
+                                <button class="syllabus-btn">2018</button>
+                                <button class="syllabus-btn">Revised 2018</button>
+                                <button class="syllabus-btn">2022</button>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="higher-studies">
+                        <h4>Scope for Higher Studies:</h4>
+                        <p>M.E/M.Tech./M.S./M.B.A./Integrated Ph.D.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(contentId) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section, .overview-section').forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('active-content');
+            });
+           
+            // Show selected content
+            const selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+                setTimeout(() => {
+                    selectedContent.classList.add('active-content');
+                }, 10);
+            }
+           
+            // Update active sidebar item
+            document.querySelectorAll('.sidebar-item-static').forEach(item => {
+                item.classList.remove('active');
+            });
+           
+            // Add active class to clicked item
+            event.target.classList.add('active');
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.programme-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.programme-tab').forEach(t => t.classList.remove('active'));
+               
+                // Add active class to clicked tab
+                this.classList.add('active');
+            });
+        });
+
+        // Syllabus button functionality
+        document.querySelectorAll('.syllabus-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Opening ' + this.textContent + ' syllabus...');
+            });
+        });
+
+        // Initialize with Overview active
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('[data-content="overview"]').classList.add('active');
+        });
+
+        // Smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

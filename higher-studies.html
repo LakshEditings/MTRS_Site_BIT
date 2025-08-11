@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher Studies - Mechatronics Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header Section */
+        .header-banner {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><rect fill="%23333" width="1200" height="300"/><g fill="%23666"><circle cx="200" cy="100" r="50" opacity="0.3"/><circle cx="400" cy="150" r="30" opacity="0.4"/><circle cx="600" cy="80" r="40" opacity="0.3"/><circle cx="800" cy="200" r="35" opacity="0.4"/><circle cx="1000" cy="120" r="45" opacity="0.3"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 60px;
+        }
+
+        .header-title {
+            background-color: rgba(103, 58, 183, 0.95);
+            color: white;
+            padding: 20px 40px;
+            font-size: 36px;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Year Selection Section */
+        .year-selection {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .year-selection h2 {
+            color: #673ab7;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .dropdown-container {
+            margin: 20px 0;
+        }
+
+        .year-dropdown {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: 2px solid #673ab7;
+            border-radius: 25px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .year-dropdown:hover {
+            background: #673ab7;
+            color: white;
+        }
+
+        .year-dropdown:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.3);
+        }
+
+        /* Cards Container */
+        .cards-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .cards-container.show {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Student Card */
+        .student-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            min-height: 320px;
+        }
+
+        .student-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #dc3545, #e74c3c);
+        }
+
+        .student-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(220, 53, 69, 0.2);
+            border-color: #dc3545;
+        }
+
+        .student-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid #dc3545;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .student-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .student-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .university-name {
+            font-size: 18px;
+            color: #dc3545;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .degree-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .degree-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .degree-details {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .location-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .admission-year {
+            background: linear-gradient(45deg, #dc3545, #e74c3c);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border: 2px solid #673ab7;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .stats-section.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* University Categories */
+        .categories-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .categories-section.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #dc3545;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        .category-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 28px;
+                padding: 15px 25px;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+
+            .student-card {
+                padding: 20px;
+                min-height: 300px;
+            }
+
+            .year-selection {
+                padding: 20px;
+            }
+
+            .year-selection h2 {
+                font-size: 28px;
+            }
+
+            .stats-grid, .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .year-dropdown {
+                min-width: 150px;
+                font-size: 16px;
+            }
+
+            .student-name {
+                font-size: 18px;
+            }
+
+            .university-name {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <div class="header-title">Higher Studies</div>
+    </div>
+
+    <div class="container">
+        <!-- Year Selection -->
+        <div class="year-selection">
+            <h2>View Higher Studies by Year</h2>
+            <div class="dropdown-container">
+                <select class="year-dropdown" id="yearDropdown" onchange="loadHigherStudies()">
+                    <option value="">Select Year</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section" id="statsSection">
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be populated here -->
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="categories-section" id="categoriesSection">
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be populated here -->
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading" style="display: none;">
+            Loading higher studies data...
+        </div>
+
+        <!-- Cards Container -->
+        <div class="cards-container" id="cardsContainer">
+            <!-- Cards will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample higher studies data
+        const higherStudiesData = {
+            2024: [
+                {
+                    name: "Rahul Krishnan",
+                    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+                    university: "Stanford University",
+                    degree: "M.S. in Mechanical Engineering",
+                    location: "USA",
+                    specialization: "Robotics and Automation",
+                    admissionYear: "Fall 2024"
+                },
+                {
+                    name: "Priya Nair",
+                    photo: "https://images.unsplash.com/photo-1494790108755-2616b612b412?w=150&h=150&fit=crop&crop=face",
+                    university: "MIT",
+                    degree: "M.S. in Electrical Engineering",
+                    location: "USA",
+                    specialization: "Artificial Intelligence",
+                    admissionYear: "Fall 2024"
+                },
+                {
+                    name: "Arjun Patel",
+                    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+                    university: "University of Cambridge",
+                    degree: "M.Phil in Engineering",
+                    location: "UK",
+                    specialization: "Advanced Manufacturing",
+                    admissionYear: "Oct 2024"
+                },
+                {
+                    name: "Sneha Reddy",
+                    photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+                    university: "ETH Zurich",
+                    degree: "M.Sc. in Robotics",
+                    location: "Switzerland",
+                    specialization: "Autonomous Systems",
+                    admissionYear: "Sep 2024"
+                },
+                {
+                    name: "Vikash Kumar",
+                    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+                    university: "IIT Bombay",
+                    degree: "M.Tech in Design Engineering",
+                    location: "India",
+                    specialization: "Product Design",
+                    admissionYear: "July 2024"
+                },
+                {
+                    name: "Anita Singh",
+                    photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+                    university: "Carnegie Mellon University",
+                    degree: "M.S. in Mechatronics",
+                    location: "USA",
+                    specialization: "Human-Robot Interaction",
+                    admissionYear: "Fall 2024"
+                }
+            ],
+            2023: [
+                {
+                    name: "Rohit Sharma",
+                    photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=150&h=150&fit=crop&crop=face",
+                    university: "University of Toronto",
+                    degree: "M.A.Sc in Mechanical Engineering",
+                    location: "Canada",
+                    specialization: "Control Systems",
+                    admissionYear: "Sep 2023"
+                },
+                {
+                    name: "Kavya Menon",
+                    photo: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+                    university: "Technical University of Munich",
+                    degree: "M.Sc. in Mechatronics",
+                    location: "Germany",
+                    specialization: "Automotive Systems",
+                    admissionYear: "Oct 2023"
+                },
+                {
+                    name: "Aditya Verma",
+                    photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
+                    university: "IIT Delhi",
+                    degree: "M.Tech in Automation",
+                    location: "India",
+                    specialization: "Industrial Automation",
+                    admissionYear: "July 2023"
+                },
+                {
+                    name: "Meera Nair",
+                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+                    university: "University of Melbourne",
+                    degree: "M.Eng in Mechatronics",
+                    location: "Australia",
+                    specialization: "Biomedical Engineering",
+                    admissionYear: "Mar 2023"
+                }
+            ],
+            2022: [
+                {
+                    name: "Suresh Babu",
+                    photo: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face",
+                    university: "NTU Singapore",
+                    degree: "M.Sc. in Mechanical Engineering",
+                    location: "Singapore",
+                    specialization: "Manufacturing Technology",
+                    admissionYear: "Aug 2022"
+                },
+                {
+                    name: "Divya Krishna",
+                    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+                    university: "IISc Bangalore",
+                    degree: "M.Tech in Design Engineering",
+                    location: "India",
+                    specialization: "Computational Design",
+                    admissionYear: "July 2022"
+                },
+                {
+                    name: "Karthik Raj",
+                    photo: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face",
+                    university: "RWTH Aachen",
+                    degree: "M.Sc. in Automotive Engineering",
+                    location: "Germany",
+                    specialization: "Electric Vehicles",
+                    admissionYear: "Oct 2022"
+                }
+            ]
+        };
+
+        function loadHigherStudies() {
+            const selectedYear = document.getElementById('yearDropdown').value;
+            const cardsContainer = document.getElementById('cardsContainer');
+            const loading = document.getElementById('loading');
+            const statsSection = document.getElementById('statsSection');
+            const categoriesSection = document.getElementById('categoriesSection');
+           
+            if (!selectedYear) {
+                cardsContainer.classList.remove('show');
+                statsSection.classList.remove('show');
+                categoriesSection.classList.remove('show');
+                return;
+            }
+           
+            // Show loading
+            loading.style.display = 'block';
+            cardsContainer.classList.remove('show');
+            statsSection.classList.remove('show');
+            categoriesSection.classList.remove('show');
+           
+            // Simulate loading delay
+            setTimeout(() => {
+                loading.style.display = 'none';
+                displayHigherStudies(selectedYear);
+                displayStats(selectedYear);
+                displayCategories(selectedYear);
+            }, 500);
+        }
+
+        function displayStats(year) {
+            const students = higherStudiesData[year] || [];
+            const statsGrid = document.getElementById('statsGrid');
+            const statsSection = document.getElementById('statsSection');
+           
+            const totalStudents = students.length;
+            const uniqueUniversities = new Set(students.map(s => s.university)).size;
+            const uniqueCountries = new Set(students.map(s => s.location)).size;
+            const mastersDegrees = students.filter(s => s.degree.includes('M.')).length;
+           
+            statsGrid.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-number">${totalStudents}</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${uniqueUniversities}</div>
+                    <div class="stat-label">Universities</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${uniqueCountries}</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${mastersDegrees}</div>
+                    <div class="stat-label">Master's Degrees</div>
+                </div>
+            `;
+           
+            statsSection.classList.add('show');
+        }
+
+        function displayCategories(year) {
+            const students = higherStudiesData[year] || [];
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            const categoriesSection = document.getElementById('categoriesSection');
+           
+            // Group by location/country
+            const locationGroups = students.reduce((acc, student) => {
+                acc[student.location] = (acc[student.location] || 0) + 1;
+                return acc;
+            }, {});
+           
+            // Group by degree type
+            const degreeGroups = students.reduce((acc, student) => {
+                const degreeType = student.degree.includes('M.S.') ? 'M.S.' :
+                                 student.degree.includes('M.Tech') ? 'M.Tech' :
+                                 student.degree.includes('M.Eng') ? 'M.Eng' :
+                                 student.degree.includes('M.Sc.') ? 'M.Sc.' : 'Others';
+                acc[degreeType] = (acc[degreeType] || 0) + 1;
+                return acc;
+            }, {});
+           
+            let categoriesHTML = '';
+           
+            // Add location categories
+            Object.entries(locationGroups).forEach(([location, count]) => {
+                categoriesHTML += `
+                    <div class="category-item">
+                        <div class="category-title">${location}</div>
+                        <div class="category-count">${count} Students</div>
+                    </div>
+                `;
+            });
+           
+            // Add degree type categories
+            Object.entries(degreeGroups).forEach(([degree, count]) => {
+                categoriesHTML += `
+                    <div class="category-item">
+                        <div class="category-title">${degree} Programs</div>
+                        <div class="category-count">${count} Students</div>
+                    </div>
+                `;
+            });
+           
+            categoriesGrid.innerHTML = categoriesHTML;
+            categoriesSection.classList.add('show');
+        }
+
+        function displayHigherStudies(year) {
+            const cardsContainer = document.getElementById('cardsContainer');
+            const students = higherStudiesData[year] || [];
+           
+            cardsContainer.innerHTML = '';
+           
+            students.forEach(student => {
+                const card = document.createElement('div');
+                card.className = 'student-card';
+                card.innerHTML = `
+                    <div class="location-badge">${student.location}</div>
+                    <div class="student-photo">
+                        <img src="${student.photo}" alt="${student.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik01MCA1MEM0MS4yIDUwIDM0IDQyLjggMzQgMzRWMzRIODZWMzRDODYgNDIuOCA3OC44IDUwIDUwIDUwWiIgZmlsbD0iI0M1QzdENCIvPgo8cGF0aCBkPSJNNTAgNjZDNDEuMiA2NiAzNCA3My4yIDM0IDgyVjgySDg2VjgyQzg2IDczLjIgNzguOCA2NiA1MCA2NloiIGZpbGw9IiNDNUM3RDQiLz4KPC9zdmc+'">
+                    </div>
+                    <div class="student-name">${student.name}</div>
+                    <div class="university-name">${student.university}</div>
+                    <div class="degree-info">
+                        <div class="degree-title">${student.degree}</div>
+                        <div class="degree-details">
+                            <strong>Specialization:</strong> ${student.specialization}
+                        </div>
+                    </div>
+                    <div class="admission-year">${student.admissionYear}</div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+           
+            cardsContainer.classList.add('show');
+        }
+
+        // Add smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.addEventListener('change', function() {
+                if (this.value) {
+                    setTimeout(() => {
+                        document.getElementById('statsSection').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 600);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

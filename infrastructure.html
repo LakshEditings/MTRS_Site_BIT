@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure - Mechatronics Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Section */
+        .header-banner {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><rect fill="%23333" width="1200" height="300"/><g fill="%23666"><circle cx="200" cy="100" r="50" opacity="0.3"/><circle cx="400" cy="150" r="30" opacity="0.4"/><circle cx="600" cy="80" r="40" opacity="0.3"/><circle cx="800" cy="200" r="35" opacity="0.4"/><circle cx="1000" cy="120" r="45" opacity="0.3"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 60px;
+        }
+
+        .header-title {
+            background-color: rgba(103, 58, 183, 0.95);
+            color: white;
+            padding: 20px 40px;
+            font-size: 36px;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Overview Section */
+        .overview-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .overview-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .overview-item {
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(103, 58, 183, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .overview-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .overview-item h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .overview-item p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Centers of Excellence Section */
+        .centers-section {
+            margin: 60px 0;
+        }
+
+        .centers-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .centers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .center-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .center-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(103, 58, 183, 0.3);
+        }
+
+        .center-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .center-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(103, 58, 183, 0.8), rgba(156, 39, 176, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .center-card:hover .center-image::before {
+            opacity: 1;
+        }
+
+        .center-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .center-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .center-subtitle {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Academic Labs Section */
+        .labs-section {
+            margin: 60px 0;
+        }
+
+        .labs-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .lab-card {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .lab-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .lab-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-body h4 {
+            color: #673ab7;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e1bee7;
+            padding-bottom: 5px;
+        }
+
+        .modal-body p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #673ab7;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+            background: #e1bee7;
+        }
+
+        /* Image Modal Styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: slideIn 0.3s ease;
+        }
+
+        .image-modal-close {
+            color: white;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .image-modal-close:hover {
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 28px;
+                padding: 15px 25px;
+            }
+
+            .overview-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .centers-grid,
+            .labs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .image-modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <div class="header-title">Infrastructure</div>
+    </div>
+
+    <div class="container">
+        <!-- Overview Section -->
+        <div class="overview-section">
+            <h2 class="overview-title">Infrastructure Overview</h2>
+            <div class="overview-content">
+                <div class="overview-item">
+                    <h3>Centers of Excellence</h3>
+                    <p>4 Specialized Centers</p>
+                </div>
+                <div class="overview-item">
+                    <h3>Special Labs</h3>
+                    <p>3 Multi-Disciplinary Special Labs</p>
+                </div>                  
+                <div class="overview-item">
+                    <h3>Smart Classes</h3>
+                    <p>Well Equipped</p>
+                </div>
+                <div class="overview-item">
+                    <h3>Academic Labs</h3>
+                    <p>8 Modern Laboratories</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centers of Excellence Section -->
+        <div class="centers-section">
+            <h2 class="centers-title">Centers of Excellence</h2>
+            <div class="centers-grid">
+                <div class="center-card" onclick="openModal('festo-modal')">
+                    <div class="center-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1kDwdN33PUu7PtpMoP3GNhEYXFxEKcinX');">
+                    </div>
+                    <div class="center-content">
+                        <h3 class="center-title">FESTO</h3>
+                        <p class="center-subtitle">Industrial Automation Center of Excellence</p>
+                    </div>
+                </div>
+
+                <div class="center-card" onclick="openModal('abb-modal')">
+                    <div class="center-image" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop');">
+                    </div>
+                    <div class="center-content">
+                        <h3 class="center-title">ABB</h3>
+                        <p class="center-subtitle">Industrial Automation Center of Excellence</p>
+                    </div>
+                </div>
+
+                <div class="center-card" onclick="openModal('sew-modal')">
+                    <div class="center-image" style="background-image: url('https://images.unsplash.com/photo-1586521995568-39abaa0c2311?w=400&h=300&fit=crop');">
+                    </div>
+                    <div class="center-content">
+                        <h3 class="center-title">SEW EURODRIVE</h3>
+                        <p class="center-subtitle">Drives Center of Excellence</p>
+                    </div>
+                </div>
+
+                <div class="center-card" onclick="openModal('drone-modal')">
+                    <div class="center-image" style="background-image: url('https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400&h=300&fit=crop');">
+                    </div>
+                    <div class="center-content">
+                        <h3 class="center-title">DRONE & 3D PRINTING</h3>
+                        <p class="center-subtitle">Center of Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Labs Section -->
+        <div class="labs-section">
+            <h2 class="labs-title">Academic Laboratories</h2>
+            <div class="labs-grid">
+                <div class="lab-card" onclick="openModal('mechatronics-modal')">
+                    <h3>MECHATRONICS LAB</h3>
+                    <p>Advanced mechatronic systems and integration</p>
+                </div>
+
+                <div class="lab-card" onclick="openModal('computer-modal')">
+                    <h3>COMPUTER LAB</h3>
+                    <p>Programming and simulation environment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+   
+    <!-- FESTO Modal -->
+    <div id="festo-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">FESTO Industrial Automation Center of Excellence</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Overview</h4>
+                <p>The FESTO Center of Excellence is a state-of-the-art facility designed to provide hands-on experience with industrial automation systems. This center bridges the gap between theoretical knowledge and practical industrial applications.</p>
+               
+                <h4>Key Features & Stations</h4>
+                <div class="features-list">
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1L4TCzGxMr34ctRd64g5QbnMXrCJapnRC', 'Distribution Station')">
+                        <strong>Distribution Station</strong><br>
+                        Material distribution and supply systems
+                    </div>
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1VxyEVP4RI2aZ-gs-P6Y2O8hMJxfjvi1g', 'Measuring Station')">
+                        <strong>Measuring Station</strong><br>
+                        Precision measurement and quality control
+                    </div>
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1T9QNaWA8e---RqOfkBI9WfzNnJqSb672', 'Handling Station')">
+                        <strong>Handling Station</strong><br>
+                        Automated material handling systems
+                    </div>
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1Bvv2mgSxxkBIbEy9ssRSt457HrgNPND2', 'Sorting Station')">
+                        <strong>Sorting Station</strong><br>
+                        Intelligent sorting and classification
+                    </div>
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1PbL9ZOM-76G1UgUX_IZRmPA3f3T84unp', 'Robot Station')">
+                        <strong>Robot Station</strong><br>
+                        Industrial robotics and automation
+                    </div>
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1wC5lSRMr9gSnGhyrHyvXs7MpLs6m6e53', 'Packing Station')">
+                        <strong>Packing Station</strong><br>
+                        Automated packaging solutions
+                    </div>
+                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1h3Z-k0j7DWTNDrHtvZ_yEyGT-vGef0sV', 'Storing Station')">
+                        <strong>Storing Station</strong><br>
+                        Warehouse automation systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>Process Control 1</strong><br>
+                        Basic process control systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>Process Control 2</strong><br>
+                        Advanced process control applications
+                    </div>
+                    <div class="feature-item">
+                        <strong>Modelling Station</strong><br>
+                        System modeling and simulation
+                    </div>
+                </div>
+               
+                <h4>Learning Outcomes</h4>
+                <p>Students gain practical experience in pneumatic and hydraulic systems, PLC programming, sensor integration, and complete factory automation solutions. The center enables students to understand Industry 4.0 concepts and smart manufacturing processes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <img class="image-modal-content" id="image-modal-img">
+        <div id="image-modal-caption" style="color: white; text-align: center; margin-top: 10px;"></div>
+    </div>
+
+    <!-- ABB Modal -->
+    <div id="abb-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">ABB Industrial Automation Center of Excellence</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Overview</h4>
+                <p>The ABB Center of Excellence focuses on power systems, robotics, and industrial automation solutions. It provides comprehensive training on ABB's cutting-edge technologies and systems.</p>
+               
+                <h4>Key Features</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>Industrial Robots</strong><br>
+                        ABB IRB series robotic arms
+                    </div>
+                    <div class="feature-item">
+                        <strong>Power Electronics</strong><br>
+                        Variable frequency drives and inverters
+                    </div>
+                    <div class="feature-item">
+                        <strong>Motion Control</strong><br>
+                        Servo systems and motion controllers
+                    </div>
+                    <div class="feature-item">
+                        <strong>HMI Systems</strong><br>
+                        Human-machine interface solutions
+                    </div>
+                    <div class="feature-item">
+                        <strong>SCADA Systems</strong><br>
+                        Supervisory control and data acquisition
+                    </div>
+                    <div class="feature-item">
+                        <strong>Safety Systems</strong><br>
+                        Industrial safety and protection devices
+                    </div>
+                </div>
+               
+                <h4>Applications</h4>
+                <p>Students learn to program and operate industrial robots, design power distribution systems, implement safety protocols, and develop complete automation solutions for manufacturing environments.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEW Modal -->
+    <div id="sew-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">SEW EURODRIVE Drives Center of Excellence</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Overview</h4>
+                <p>The SEW EURODRIVE Center specializes in drive technology, gear motors, and motion control systems. It offers comprehensive training on drive solutions for various industrial applications.</p>
+               
+                <h4>Key Features</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>Gear Motors</strong><br>
+                        Various types of gear motor systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>Variable Frequency Drives</strong><br>
+                        Speed control and energy efficiency
+                    </div>
+                    <div class="feature-item">
+                        <strong>Servo Systems</strong><br>
+                        Precision positioning and control
+                    </div>
+                    <div class="feature-item">
+                        <strong>Decentralized Drives</strong><br>
+                        Distributed drive solutions
+                    </div>
+                    <div class="feature-item">
+                        <strong>Safety Technology</strong><br>
+                        Safe motion and drive protection
+                    </div>
+                    <div class="feature-item">
+                        <strong>Energy Management</strong><br>
+                        Energy-efficient drive solutions
+                    </div>
+                </div>
+               
+                <h4>Learning Outcomes</h4>
+                <p>Students gain expertise in drive technology, learn to select appropriate drive solutions for different applications, understand energy efficiency principles, and develop skills in drive system integration and maintenance.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drone & 3D Printing Modal -->
+    <div id="drone-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Drone & 3D Printing Center of Excellence</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Overview</h4>
+                <p>This cutting-edge center focuses on emerging technologies in unmanned aerial vehicles (UAVs) and additive manufacturing. It provides hands-on experience with the latest drone technology and 3D printing systems.</p>
+               
+                <h4>Key Features</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>Quadcopter Systems</strong><br>
+                        Multi-rotor drone platforms
+                    </div>
+                    <div class="feature-item">
+                        <strong>FDM 3D Printers</strong><br>
+                        Fused deposition modeling systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>SLA 3D Printers</strong><br>
+                        Stereolithography printing technology
+                    </div>
+                    <div class="feature-item">
+                        <strong>Flight Controllers</strong><br>
+                        Autopilot and navigation systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>CAD/CAM Software</strong><br>
+                        Design and manufacturing software
+                    </div>
+                    <div class="feature-item">
+                        <strong>Material Testing</strong><br>
+                        3D printing material analysis
+                    </div>
+                </div>
+               
+                <h4>Applications</h4>
+                <p>Students learn drone assembly, programming, and operation for various applications including surveillance, mapping, and delivery systems. They also gain expertise in 3D modeling, printing processes, post-processing techniques, and rapid prototyping for product development.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mechatronics Lab Modal -->
+    <div id="mechatronics-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Mechatronics Laboratory</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Overview</h4>
+                <p>The Mechatronics Laboratory is designed to provide integrated learning experiences combining mechanical, electrical, and computer engineering principles. It serves as the foundation for understanding mechatronic system design and integration.</p>
+               
+                <h4>Equipment & Systems</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>Sensor Systems</strong><br>
+                        Various sensors for measurement and control
+                    </div>
+                    <div class="feature-item">
+                        <strong>Actuator Systems</strong><br>
+                        Motors, pneumatics, and hydraulics
+                    </div>
+                    <div class="feature-item">
+                        <strong>Microcontrollers</strong><br>
+                        Arduino, Raspberry Pi, and PIC systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>Data Acquisition</strong><br>
+                        Real-time data collection systems
+                    </div>
+                    <div class="feature-item">
+                        <strong>Control Systems</strong><br>
+                        Feedback control implementation
+                    </div>
+                    <div class="feature-item">
+                        <strong>Mechanical Systems</strong><br>
+                        Linkages, gears, and transmission systems
+                    </div>
+                </div>
+               
+                <h4>Learning Objectives</h4>
+                <p>Students develop skills in system integration, control algorithm implementation, sensor interfacing, and mechatronic system design. The lab emphasizes hands-on learning through project-based activities and real-world problem solving.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Computer Lab Modal -->
+    <div id="computer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Computer Laboratory</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Overview</h4>
+                <p>The Computer Laboratory provides a comprehensive environment for software development, simulation, and computational analysis essential for mechatronic system design and implementation.</p>
+               
+                <h4>Software & Tools</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>MATLAB/Simulink</strong><br>
+                        System modeling and simulation
+                    </div>
+                    <div class="feature-item">
+                        <strong>SolidWorks</strong><br>
+                        3D CAD modeling and analysis
+                    </div>
+                    <div class="feature-item">
+                        <strong>LabVIEW</strong><br>
+                        Virtual instrumentation platform
+                    </div>
+                    <div class="feature-item">
+                        <strong>Programming Languages</strong><br>
+                        C/C++, Python, and embedded programming
+                    </div>
+                    <div class="feature-item">
+                        <strong>PLC Programming</strong><br>
+                        Industrial automation programming
+                    </div>
+                    <div class="feature-item">
+                        <strong>Simulation Software</strong><br>
+                        System dynamics and control simulation
+                    </div>
+                </div>
+               
+                <h4>Capabilities</h4>
+                <p>The lab enables students to develop programming skills, perform system simulations, design control algorithms, create 3D models, and analyze mechatronic systems before physical implementation. It serves as a digital twin environment for real-world applications.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Image Modal functionality
+        function openImageModal(imgSrc, caption) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('image-modal-img');
+            const modalCaption = document.getElementById('image-modal-caption');
+            modal.style.display = 'block';
+            modalImg.src = imgSrc;
+            modalCaption.innerText = caption;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            document.getElementById('image-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking the close button
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close image modal when clicking the close button
+        document.querySelectorAll('.image-modal-close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                closeImageModal();
+            });
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (event.target.classList.contains('image-modal')) {
+                closeImageModal();
+            }
+        });
+
+        // Escape key to close modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                closeImageModal();
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Add smooth scrolling for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
