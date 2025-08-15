@@ -324,43 +324,6 @@
             background: #e1bee7;
         }
 
-        /* Image Modal Styles */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .image-modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            max-height: 80vh;
-            object-fit: contain;
-            animation: slideIn 0.3s ease;
-        }
-
-        .image-modal-close {
-            color: white;
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .image-modal-close:hover {
-            opacity: 0.7;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-title {
@@ -390,10 +353,6 @@
 
             .features-list {
                 grid-template-columns: 1fr;
-            }
-
-            .image-modal-content {
-                width: 90%;
             }
         }
     </style>
@@ -432,7 +391,7 @@
         <div class="centers-section">
             <h2 class="centers-title">Centers of Excellence</h2>
             <div class="centers-grid">
-                <div class="center-card" onclick="openModal('festo-modal')">
+                <div class="center-card" onclick="window.location.href='festo.html';">
                     <div class="center-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1kDwdN33PUu7PtpMoP3GNhEYXFxEKcinX');">
                     </div>
                     <div class="center-content">
@@ -487,75 +446,7 @@
         </div>
     </div>
 
-    <!-- Modals -->
-   
-    <!-- FESTO Modal -->
-    <div id="festo-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2 class="modal-title">FESTO Industrial Automation Center of Excellence</h2>
-            </div>
-            <div class="modal-body">
-                <h4>Overview</h4>
-                <p>The FESTO Center of Excellence is a state-of-the-art facility designed to provide hands-on experience with industrial automation systems. This center bridges the gap between theoretical knowledge and practical industrial applications.</p>
-               
-                <h4>Key Features & Stations</h4>
-                <div class="features-list">
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1L4TCzGxMr34ctRd64g5QbnMXrCJapnRC', 'Distribution Station')">
-                        <strong>Distribution Station</strong><br>
-                        Material distribution and supply systems
-                    </div>
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1VxyEVP4RI2aZ-gs-P6Y2O8hMJxfjvi1g', 'Measuring Station')">
-                        <strong>Measuring Station</strong><br>
-                        Precision measurement and quality control
-                    </div>
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1T9QNaWA8e---RqOfkBI9WfzNnJqSb672', 'Handling Station')">
-                        <strong>Handling Station</strong><br>
-                        Automated material handling systems
-                    </div>
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1Bvv2mgSxxkBIbEy9ssRSt457HrgNPND2', 'Sorting Station')">
-                        <strong>Sorting Station</strong><br>
-                        Intelligent sorting and classification
-                    </div>
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1PbL9ZOM-76G1UgUX_IZRmPA3f3T84unp', 'Robot Station')">
-                        <strong>Robot Station</strong><br>
-                        Industrial robotics and automation
-                    </div>
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1wC5lSRMr9gSnGhyrHyvXs7MpLs6m6e53', 'Packing Station')">
-                        <strong>Packing Station</strong><br>
-                        Automated packaging solutions
-                    </div>
-                    <div class="feature-item" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1h3Z-k0j7DWTNDrHtvZ_yEyGT-vGef0sV', 'Storing Station')">
-                        <strong>Storing Station</strong><br>
-                        Warehouse automation systems
-                    </div>
-                    <div class="feature-item">
-                        <strong>Process Control 1</strong><br>
-                        Basic process control systems
-                    </div>
-                    <div class="feature-item">
-                        <strong>Process Control 2</strong><br>
-                        Advanced process control applications
-                    </div>
-                    <div class="feature-item">
-                        <strong>Modelling Station</strong><br>
-                        System modeling and simulation
-                    </div>
-                </div>
-               
-                <h4>Learning Outcomes</h4>
-                <p>Students gain practical experience in pneumatic and hydraulic systems, PLC programming, sensor integration, and complete factory automation solutions. The center enables students to understand Industry 4.0 concepts and smart manufacturing processes.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Image Modal -->
-    <div id="image-modal" class="image-modal">
-        <span class="image-modal-close">&times;</span>
-        <img class="image-modal-content" id="image-modal-img">
-        <div id="image-modal-caption" style="color: white; text-align: center; margin-top: 10px;"></div>
-    </div>
+    <!-- Modals (Excluding FESTO) -->
 
     <!-- ABB Modal -->
     <div id="abb-modal" class="modal">
@@ -794,34 +685,11 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Image Modal functionality
-        function openImageModal(imgSrc, caption) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('image-modal-img');
-            const modalCaption = document.getElementById('image-modal-caption');
-            modal.style.display = 'block';
-            modalImg.src = imgSrc;
-            modalCaption.innerText = caption;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeImageModal() {
-            document.getElementById('image-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
         // Close modal when clicking the close button
         document.querySelectorAll('.close').forEach(closeBtn => {
             closeBtn.addEventListener('click', function() {
                 this.closest('.modal').style.display = 'none';
                 document.body.style.overflow = 'auto';
-            });
-        });
-
-        // Close image modal when clicking the close button
-        document.querySelectorAll('.image-modal-close').forEach(closeBtn => {
-            closeBtn.addEventListener('click', function() {
-                closeImageModal();
             });
         });
 
@@ -831,9 +699,6 @@
                 event.target.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
-            if (event.target.classList.contains('image-modal')) {
-                closeImageModal();
-            }
         });
 
         // Escape key to close modals
@@ -842,7 +707,6 @@
                 document.querySelectorAll('.modal').forEach(modal => {
                     modal.style.display = 'none';
                 });
-                closeImageModal();
                 document.body.style.overflow = 'auto';
             }
         });
