@@ -17,27 +17,215 @@
             color: #333;
         }
 
-        /* Header Section */
-        .header-banner {
+        /* Carousel Styles */
+        .carousel-container {
             position: relative;
-            height: 300px;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><rect fill="%23333" width="1200" height="300"/><g fill="%23666"><circle cx="200" cy="100" r="50" opacity="0.3"/><circle cx="400" cy="150" r="30" opacity="0.4"/><circle cx="600" cy="80" r="40" opacity="0.3"/><circle cx="800" cy="200" r="35" opacity="0.4"/><circle cx="1000" cy="120" r="45" opacity="0.3"/></g></svg>');
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.7s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .carousel-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            letter-spacing: 2px;
+        }
+
+        .carousel-subtitle {
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .carousel-description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        .carousel-btn {
+            background: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .carousel-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            padding-left: 60px;
+            justify-content: center;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0,0,0,0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev {
+            left: 20px;
+        }
+
+        .carousel-arrow.next {
+            right: 20px;
+        }
+
+        /* Thumbnail Navigation */
+        .carousel-thumbnails {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .carousel-thumbnail {
+            width: 60px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+        }
+
+        .carousel-thumbnail.active {
+            border-color: #ffd700;
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .carousel-thumbnail:hover {
+            border-color: white;
+            opacity: 1;
+        }
+
+        /* Slide Counter */
+        .carousel-counter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        /* Auto-play Control */
+        .carousel-play-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-play-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        /* Header Section - Modified */
+        .header-banner {
+            position: relative;
+            height: 100px;
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .header-title {
-            background-color: rgba(103, 58, 183, 0.95);
             color: white;
-            padding: 20px 40px;
             font-size: 36px;
             font-weight: bold;
-            margin-left: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         /* Main Container */
@@ -126,7 +314,7 @@
         }
 
         /* Card Container - Full Width */
-            .card-container-section {
+        .card-container-section {
             background-color: #f8f9fa;
             padding: 10px 0;
             margin-top: -170px;
@@ -176,39 +364,6 @@
 
         .card:hover:before {
             background: rgba(103, 58, 183, 0.7);
-        }
-
-        /* Individual card backgrounds */
-        .card:nth-child(1) {
-            background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');
-        }
-
-        .card:nth-child(2) {
-            background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');
-        }
-
-        .card:nth-child(3) {
-            background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');
-        }
-
-        .card:nth-child(4) {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
-        }
-
-        .card:nth-child(5) {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
-        }
-
-        .card:nth-child(6) {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
-        }
-
-        .card:nth-child(7) {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
-        }
-
-        .card:nth-child(8) {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');
         }
 
         .card h3 {
@@ -444,6 +599,37 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .carousel-container {
+                height: 400px;
+            }
+
+            .carousel-title {
+                font-size: 32px;
+            }
+
+            .carousel-subtitle {
+                font-size: 18px;
+            }
+
+            .carousel-description {
+                font-size: 16px;
+            }
+
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .carousel-thumbnails {
+                gap: 5px;
+            }
+
+            .carousel-thumbnail {
+                width: 40px;
+                height: 30px;
+            }
+
             .header-title {
                 font-size: 28px;
                 padding: 15px 25px;
@@ -492,6 +678,28 @@
     </style>
 </head>
 <body>
+    <!-- Carousel Header -->
+    <div class="carousel-container" id="carousel">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Slides will be generated by JavaScript -->
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="carousel-arrow prev" onclick="previousSlide()">❮</button>
+        <button class="carousel-arrow next" onclick="nextSlide()">❯</button>
+
+        <!-- Slide Counter -->
+        <div class="carousel-counter" id="slideCounter">1 / 10</div>
+
+        <!-- Auto-play Control -->
+        <button class="carousel-play-btn" id="playBtn" onclick="toggleAutoplay()">⏸️</button>
+
+        <!-- Thumbnail Navigation -->
+        <div class="carousel-thumbnails" id="thumbnailContainer">
+            <!-- Thumbnails will be generated by JavaScript -->
+        </div>
+    </div>
+
     <!-- Header Banner -->
     <div class="header-banner">
         <div class="header-title">Mechatronics Engineering</div>
@@ -679,6 +887,257 @@
     </div>
 
     <script>
+        // ===== CAROUSEL CONFIGURATION =====
+        // Add your carousel image URLs here - just replace the URLs in this array
+        const CAROUSEL_IMAGES = [
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
+            'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg'
+        ];
+
+        // Customize slide content here
+        const SLIDE_CONTENT = [
+            {
+                title: 'MECHATRONICS ENGINEERING',
+                subtitle: 'DEPARTMENT OF EXCELLENCE',
+                description: 'Innovative technology meets cutting-edge research in our state-of-the-art facilities',
+                buttonText: 'READ MORE',
+                buttonLink: '#overview-content'
+            },
+            {
+                title: 'ROBOTICS & AUTOMATION',
+                subtitle: 'FUTURE TECHNOLOGY',
+                description: 'Explore the world of intelligent systems and automated solutions',
+                buttonText: 'EXPLORE',
+                buttonLink: '#'
+            },
+            {
+                title: 'RESEARCH EXCELLENCE',
+                subtitle: 'INNOVATION DRIVEN',
+                description: 'Leading research in embedded systems and intelligent manufacturing',
+                buttonText: 'DISCOVER',
+                buttonLink: '#'
+            },
+            {
+                title: 'INDUSTRY PARTNERSHIPS',
+                subtitle: 'REAL WORLD EXPERIENCE',
+                description: 'Strong collaborations with leading industries for practical learning',
+                buttonText: 'LEARN MORE',
+                buttonLink: '#'
+            },
+            {
+                title: 'STUDENT ACHIEVEMENTS',
+                subtitle: 'SUCCESS STORIES',
+                description: 'Our students excel in competitions and secure top placements',
+                buttonText: 'VIEW ACHIEVEMENTS',
+                buttonLink: '#'
+            },
+            {
+                title: 'MODERN LABORATORIES',
+                subtitle: 'ADVANCED FACILITIES',
+                description: 'Well-equipped labs for hands-on learning and experimentation',
+                buttonText: 'EXPLORE LABS',
+                buttonLink: '#'
+            },
+            {
+                title: 'FACULTY EXPERTISE',
+                subtitle: 'EXPERIENCED MENTORS',
+                description: 'Learn from highly qualified and dedicated faculty members',
+                buttonText: 'MEET FACULTY',
+                buttonLink: '#'
+            },
+            {
+                title: 'CAREER OPPORTUNITIES',
+                subtitle: 'BRIGHT FUTURE',
+                description: 'Excellent placement records and career growth opportunities',
+                buttonText: 'VIEW PLACEMENTS',
+                buttonLink: '#'
+            },
+            {
+                title: 'INNOVATION HUB',
+                subtitle: 'CREATIVE SOLUTIONS',
+                description: 'Fostering innovation through project-based learning',
+                buttonText: 'SEE PROJECTS',
+                buttonLink: '#'
+            },
+            {
+                title: 'GLOBAL VISION',
+                subtitle: 'WORLD CLASS EDUCATION',
+                description: 'Preparing students for global challenges in engineering',
+                buttonText: 'JOIN US',
+                buttonLink: '#'
+            }
+        ];
+
+        // ===== CAROUSEL FUNCTIONALITY =====
+        let currentSlide = 0;
+        let isAutoPlaying = true;
+        let autoPlayInterval;
+
+        // Initialize carousel
+        function initCarousel() {
+            createSlides();
+            createThumbnails();
+            startAutoPlay();
+            updateSlideCounter();
+        }
+
+        // Create carousel slides
+        function createSlides() {
+            const track = document.getElementById('carouselTrack');
+            track.innerHTML = '';
+
+            CAROUSEL_IMAGES.forEach((imageUrl, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.style.backgroundImage = `url('${imageUrl}')`;
+
+                const content = SLIDE_CONTENT[index] || SLIDE_CONTENT[0];
+                
+                slide.innerHTML = `
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">${content.title}</h1>
+                        <h2 class="carousel-subtitle">${content.subtitle}</h2>
+                        <p class="carousel-description">${content.description}</p>
+                        <a href="${content.buttonLink}" class="carousel-btn">${content.buttonText} →</a>
+                    </div>
+                `;
+
+                track.appendChild(slide);
+            });
+        }
+
+        // Create thumbnail navigation
+        function createThumbnails() {
+            const container = document.getElementById('thumbnailContainer');
+            container.innerHTML = '';
+
+            CAROUSEL_IMAGES.forEach((imageUrl, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `carousel-thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.style.backgroundImage = `url('${imageUrl}')`;
+                thumbnail.onclick = () => goToSlide(index);
+                container.appendChild(thumbnail);
+            });
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        // Previous slide
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + CAROUSEL_IMAGES.length) % CAROUSEL_IMAGES.length;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        // Next slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % CAROUSEL_IMAGES.length;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        // Update carousel display
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update thumbnails
+            document.querySelectorAll('.carousel-thumbnail').forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentSlide);
+            });
+
+            updateSlideCounter();
+        }
+
+        // Update slide counter
+        function updateSlideCounter() {
+            const counter = document.getElementById('slideCounter');
+            counter.textContent = `${currentSlide + 1} / ${CAROUSEL_IMAGES.length}`;
+        }
+
+        // Auto play functionality
+        function startAutoPlay() {
+            if (isAutoPlaying) {
+                autoPlayInterval = setInterval(() => {
+                    nextSlide();
+                }, 4000);
+            }
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        function resetAutoPlay() {
+            stopAutoPlay();
+            if (isAutoPlaying) {
+                startAutoPlay();
+            }
+        }
+
+        function toggleAutoplay() {
+            isAutoPlaying = !isAutoPlaying;
+            const playBtn = document.getElementById('playBtn');
+            playBtn.textContent = isAutoPlaying ? '⏸️' : '▶️';
+            
+            if (isAutoPlaying) {
+                startAutoPlay();
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        // Pause on hover
+        document.getElementById('carousel').addEventListener('mouseenter', stopAutoPlay);
+        document.getElementById('carousel').addEventListener('mouseleave', () => {
+            if (isAutoPlaying) startAutoPlay();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === ' ') {
+                e.preventDefault();
+                toggleAutoplay();
+            }
+        });
+
+        // Touch/swipe support
+        let startX = 0;
+        let endX = 0;
+
+        document.getElementById('carousel').addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        document.getElementById('carousel').addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    previousSlide();
+                }
+            }
+        });
+
+        // ===== EXISTING PAGE FUNCTIONALITY =====
         function showContent(contentId) {
             // Hide all content sections
             document.querySelectorAll('.content-section, .overview-section').forEach(section => {
@@ -722,8 +1181,12 @@
             });
         });
 
-        // Initialize with Overview active
+        // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize carousel
+            initCarousel();
+            
+            // Set initial active sidebar item
             document.querySelector('[data-content="overview"]').classList.add('active');
         });
 
