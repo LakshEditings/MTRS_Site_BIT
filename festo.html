@@ -94,7 +94,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://drive.google.com/uc?export=view&id=1kDwdN33PUu7PtpMoP3GNhEYXFxEKcinX') center/cover;
+            background: url('Assets/hero_background.jpg') center/cover;
             opacity: 0.2;
             z-index: 1;
         }
@@ -192,10 +192,11 @@
         }
 
         .station-image {
-            height: 200px;
+            width: 100%;
+            height: 200px;   /* adjust as needed */
             background-size: cover;
             background-position: center;
-            position: relative;
+            border-radius: 10px;
         }
 
         .station-image::before {
@@ -281,9 +282,10 @@
             display: block;
             width: 80%;
             max-width: 700px;
-            max-height: 80vh;
+            max-height: 50vh;
             object-fit: contain;
             animation: slideIn 0.3s ease;
+            border-radius: 10px;
         }
 
         @keyframes slideIn {
@@ -309,8 +311,36 @@
             color: white;
             text-align: center;
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
+        }
+
+        .image-modal-description {
+            color: white;
+            text-align: center;
+            margin: 10px 20px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .image-modal-specs {
+            color: white;
+            text-align: left;
+            margin: 20px 40px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .image-modal-specs h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #673ab7;
+            padding-bottom: 5px;
+        }
+
+        .image-modal-specs ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
 
         /* Responsive Design */
@@ -408,8 +438,8 @@
         <div class="stations-section">
             <h2 class="section-title">Key Features & Stations</h2>
             <div class="stations-grid">
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1L4TCzGxMr34ctRd64g5QbnMXrCJapnRC', 'Distribution Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1L4TCzGxMr34ctRd64g5QbnMXrCJapnRC');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_Distribution.jpg', 'Distribution Station', 'Advanced material distribution and supply systems for automated production lines.', '<ul><li>Separates workpieces from stack magazine</li><li>Transports via conveyor belt</li><li>Features vacuum suction cup and double-acting cylinder</li><li>Inductive sensors for position detection</li><li>Through-beam sensor for filling level</li><li>Power: 24 V DC</li><li>Compressed air: 6 bar</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Distribution.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Distribution Station</h3>
                         <p class="station-description">
@@ -418,8 +448,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1VxyEVP4RI2aZ-gs-P6Y2O8hMJxfjvi1g', 'Measuring Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1VxyEVP4RI2aZ-gs-P6Y2O8hMJxfjvi1g');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_Measuring.jpg', 'Measuring Station', 'Precision measurement and quality control systems for industrial applications.', '<ul><li>Measures workpiece height with precision</li><li>Rejects non-compliant workpieces</li><li>Uses optical SOEG sensor (pre-10/2018) or SOEL laser sensor (post-10/2018)</li><li>PLC integration for quality control</li><li>Power: 24 V DC</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Measuring.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Measuring Station</h3>
                         <p class="station-description">
@@ -428,8 +458,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1T9QNaWA8e---RqOfkBI9WfzNnJqSb672', 'Handling Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1T9QNaWA8e---RqOfkBI9WfzNnJqSb672');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_Handling.jpg', 'Handling Station', 'Automated material handling systems with pneumatic and servo-driven components.', '<ul><li>Pneumatic gripper for material transfer</li><li>Lifting cylinder for vertical movement</li><li>Light barrier for workpiece detection</li><li>PLC communication with adjacent stations</li><li>Power: 24 V DC</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Handling.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Handling Station</h3>
                         <p class="station-description">
@@ -438,8 +468,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1Bvv2mgSxxkBIbEy9ssRSt457HrgNPND2', 'Sorting Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1Bvv2mgSxxkBIbEy9ssRSt457HrgNPND2');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_Separation.jpg', 'Sorting Station', 'Intelligent sorting and classification systems with advanced sensor technology.', '<ul><li>Sorts workpieces by borehole depth</li><li>Two material flow outputs</li><li>Advanced sensors for classification</li><li>PLC-controlled sorting logic</li><li>Power: 24 V DC</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Separation.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Sorting Station</h3>
                         <p class="station-description">
@@ -448,8 +478,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1PbL9ZOM-76G1UgUX_IZRmPA3f3T84unp', 'Robot Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1PbL9ZOM-76G1UgUX_IZRmPA3f3T84unp');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_Robot.jpg', 'Robot Station', 'Industrial robotics and automation systems for manufacturing applications.', '<ul><li>6-axis industrial robot for assembly</li><li>Automated workpiece handling</li><li>Integrated with MPS system</li><li>Power: 24 V DC</li><li>Supports Industry 4.0 protocols</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Robot.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Robot Station</h3>
                         <p class="station-description">
@@ -458,8 +488,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1wC5lSRMr9gSnGhyrHyvXs7MpLs6m6e53', 'Packing Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1wC5lSRMr9gSnGhyrHyvXs7MpLs6m6e53');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_packing.jpg', 'Packing Station', 'Automated packaging solutions with integrated quality control systems.', '<ul><li>Automates packaging with quality checks</li><li>Pneumatic actuators for handling</li><li>Integrated sensors for verification</li><li>PLC integration</li><li>Power: 24 V DC</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_packing.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Packing Station</h3>
                         <p class="station-description">
@@ -468,8 +498,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('https://drive.google.com/uc?export=view&id=1h3Z-k0j7DWTNDrHtvZ_yEyGT-vGef0sV', 'Storing Station')">
-                    <div class="station-image" style="background-image: url('https://drive.google.com/uc?export=view&id=1h3Z-k0j7DWTNDrHtvZ_yEyGT-vGef0sV');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_storage.jpg', 'Storing Station', 'Advanced warehouse automation and storage management systems.', '<ul><li>Stores up to 48 workpieces or boxes</li><li>Automated receiving and dispatch</li><li>PLC-controlled storage management</li><li>Power: 24 V DC</li><li>Supports automated retrieval</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_storage.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Storing Station</h3>
                         <p class="station-description">
@@ -478,8 +508,8 @@
                     </div>
                 </div>
 
-                <div class="station-card">
-                    <div class="station-image" style="background-image: url('https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&h=300&fit=crop');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_ProcessControl1.jpg', 'Process Control 1', 'Basic process control systems with PLC integration and HMI interfaces.', '<ul><li>PLC-based process control</li><li>HMI for operator interface</li><li>Analog and digital sensors</li><li>Power: 24 V DC</li><li>Basic automation training</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_ProcessControl1.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Process Control 1</h3>
                         <p class="station-description">
@@ -488,8 +518,8 @@
                     </div>
                 </div>
 
-                <div class="station-card">
-                    <div class="station-image" style="background-image: url('https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&h=300&fit=crop');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_ProcessControl2.jpg', 'Process Control 2', 'Advanced process control applications with SCADA integration.', '<ul><li>SCADA system integration</li><li>Advanced process monitoring</li><li>PLC with network communication</li><li>Power: 24 V DC</li><li>Real-time data visualization</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_ProcessControl2.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Process Control 2</h3>
                         <p class="station-description">
@@ -498,8 +528,8 @@
                     </div>
                 </div>
 
-                <div class="station-card">
-                    <div class="station-image" style="background-image: url('https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&h=300&fit=crop');"></div>
+                <div class="station-card" onclick="openImageModal('Assets/MPS_Modelling.jpg', 'Modelling Station', 'System modeling and simulation environment for process optimization.', '<ul><li>Simulation software integration</li><li>Process modeling tools</li><li>PLC-compatible interface</li><li>Power: 24 V DC</li><li>Supports Industry 4.0 simulations</li></ul>')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Modelling.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Modelling Station</h3>
                         <p class="station-description">
@@ -510,38 +540,28 @@
             </div>
         </div>
 
-        <!-- Learning Outcomes Section -->
-        <div class="learning-section">
-            <div class="learning-content">
-                <h4>Learning Outcomes</h4>
-                <p>
-                    Students gain practical experience in pneumatic and hydraulic systems, PLC programming, 
-                    sensor integration, and complete factory automation solutions. The center enables students 
-                    to understand Industry 4.0 concepts and smart manufacturing processes, preparing them for 
-                    the modern industrial landscape. Through hands-on training with real industrial equipment, 
-                    students develop skills in system integration, troubleshooting, maintenance, and optimization 
-                    of automated manufacturing systems.
-                </p>
-            </div>
-        </div>
-    </div>
-
     <!-- Image Modal -->
     <div id="image-modal" class="image-modal">
         <span class="image-modal-close">&times;</span>
         <img class="image-modal-content" id="image-modal-img">
         <div id="image-modal-caption" class="image-modal-caption"></div>
+        <div id="image-modal-description" class="image-modal-description"></div>
+        <div id="image-modal-specs" class="image-modal-specs"></div>
     </div>
 
     <script>
         // Image Modal functionality
-        function openImageModal(imgSrc, caption) {
+        function openImageModal(imgSrc, caption, description, specs) {
             const modal = document.getElementById('image-modal');
             const modalImg = document.getElementById('image-modal-img');
             const modalCaption = document.getElementById('image-modal-caption');
+            const modalDescription = document.getElementById('image-modal-description');
+            const modalSpecs = document.getElementById('image-modal-specs');
             modal.style.display = 'block';
             modalImg.src = imgSrc;
             modalCaption.innerText = caption;
+            modalDescription.innerText = description;
+            modalSpecs.innerHTML = '<h4>Specifications</h4>' + specs;
             document.body.style.overflow = 'hidden';
         }
 
