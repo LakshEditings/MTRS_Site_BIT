@@ -12,18 +12,102 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #333;
         }
 
-        /* Mobile-First Approach */
-        
-        /* Carousel Styles - Mobile First */
+        /* Mobile Menu Button - Hidden on Desktop */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(103, 58, 183, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(103, 58, 183, 1);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Sidebar Overlay */
+        .mobile-sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-sidebar-overlay.show {
+            opacity: 1;
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #f8f9fa;
+            z-index: 1001;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+        }
+
+        .mobile-sidebar.show {
+            right: 0;
+        }
+
+        .mobile-sidebar-header {
+            background: #673ab7;
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .mobile-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-sidebar-content {
+            padding: 0;
+        }
+
+        /* Carousel Styles */
         .carousel-container {
             position: relative;
             width: 100%;
-            height: 300px; /* Reduced for mobile */
+            height: 500px;
             overflow: hidden;
             background: #000;
         }
@@ -51,7 +135,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -63,40 +147,39 @@
             text-align: center;
             color: white;
             z-index: 2;
-            max-width: 90%;
-            padding: 0 15px;
+            max-width: 800px;
+            padding: 0 20px;
         }
 
         .carousel-title {
-            font-size: 20px; /* Mobile size */
+            font-size: 48px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .carousel-subtitle {
-            font-size: 14px; /* Mobile size */
+            font-size: 24px;
             color: #ffd700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
         .carousel-description {
-            font-size: 12px; /* Mobile size */
-            margin-bottom: 20px;
+            font-size: 18px;
+            margin-bottom: 30px;
             opacity: 0.9;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-            display: none; /* Hide on mobile initially */
         }
 
         .carousel-btn {
             background: #28a745;
             color: white;
-            padding: 8px 16px; /* Smaller for mobile */
+            padding: 12px 30px;
             border: none;
             border-radius: 5px;
-            font-size: 12px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -106,69 +189,66 @@
 
         .carousel-btn:hover {
             background: #218838;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
-        /* Navigation Arrows - Mobile optimized */
+        /* Navigation Arrows */
         .carousel-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.5);
             color: white;
             border: none;
-            width: 35px; /* Smaller for mobile */
-            height: 35px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 24px;
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
-            touch-action: manipulation; /* Better touch response */
         }
 
         .carousel-arrow:hover {
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.8);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .carousel-arrow.prev {
-            left: 10px;
+            left: 20px;
         }
 
         .carousel-arrow.next {
-            right: 10px;
+            right: 20px;
         }
 
-        /* Thumbnail Navigation - Mobile optimized */
+        /* Thumbnail Navigation */
         .carousel-thumbnails {
             position: absolute;
-            bottom: 10px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 5px;
+            gap: 10px;
             z-index: 10;
-            background: rgba(0,0,0,0.6);
-            padding: 5px;
-            border-radius: 8px;
-            overflow-x: auto; /* Allow horizontal scroll on mobile */
-            max-width: 90%;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 10px;
         }
 
         .carousel-thumbnail {
-            width: 30px; /* Smaller for mobile */
-            height: 20px;
-            border: 1px solid rgba(255,255,255,0.5);
-            border-radius: 3px;
+            width: 60px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
             background-size: cover;
             background-position: center;
             opacity: 0.7;
-            flex-shrink: 0;
         }
 
         .carousel-thumbnail.active {
@@ -177,40 +257,49 @@
             transform: scale(1.1);
         }
 
-        /* Slide Counter - Mobile optimized */
+        .carousel-thumbnail:hover {
+            border-color: white;
+            opacity: 1;
+        }
+
+        /* Slide Counter */
         .carousel-counter {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.6);
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.5);
             color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
             z-index: 10;
         }
 
         /* Auto-play Control */
         .carousel-play-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.6);
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
             color: white;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            font-size: 12px;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10;
         }
 
-        /* Header Section - Mobile First */
+        .carousel-play-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        /* Header Section - Modified */
         .header-banner {
             position: relative;
-            height: 60px; /* Reduced for mobile */
+            height: 100px;
             background: linear-gradient(135deg, #673ab7, #9c27b0);
             display: flex;
             align-items: center;
@@ -220,76 +309,62 @@
 
         .header-title {
             color: white;
-            font-size: 18px; /* Mobile size */
+            font-size: 36px;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            text-align: center;
         }
 
         /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px; /* Reduced padding for mobile */
+            padding: 0 20px;
         }
 
-        /* Content Layout - Mobile First (Stack vertically) */
+        /* Content Layout */
         .content-wrapper {
             display: flex;
-            flex-direction: column; /* Stack on mobile */
-            gap: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            gap: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
 
         .main-content {
-            width: 100%;
-            order: 2; /* Content comes after sidebar on mobile */
+            flex: 2;
         }
 
         .sidebar {
-            width: 100%;
+            flex: 0.8;
             background-color: #f8f9fa;
             padding: 0;
-            order: 1; /* Sidebar comes first on mobile */
+            margin-right: -100px;
         }
 
-        /* Overview Section - Mobile optimized */
+        /* Overview Section */
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            margin-left: -100px;
         }
 
         .section-title {
-            font-size: 24px; /* Reduced for mobile */
+            font-size: 32px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-bottom: 3px solid #673ab7;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
 
         .section-content p {
-            font-size: 14px; /* Mobile friendly */
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.8;
             color: #555;
-            text-align: left; /* Better for mobile reading */
-        }
-
-        .section-content ol {
-            padding-left: 20px;
-            list-style: decimal;
-        }
-
-        .section-content ol li {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 8px;
+            text-align: justify;
         }
 
         /* Dynamic Content Styles */
         .dynamic-content {
-            min-height: 200px; /* Reduced for mobile */
+            min-height: 400px;
         }
 
         .content-section {
@@ -301,38 +376,58 @@
             opacity: 1;
         }
 
+        .section-content ol {
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .section-content ol li {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
         /* Active Sidebar Item */
         .sidebar-item-static.active {
             background-color: #673ab7;
             color: white;
         }
 
-        /* Card Container - Mobile First */
+        .sidebar-item-static.active:hover {
+            background-color: #673ab7;
+            color: white;
+        }
+
+        /* Card Container - Full Width */
         .card-container-section {
             background-color: #f8f9fa;
-            padding: 20px 0;
-            margin-top: 20px;
+            padding: 10px 0;
+            margin-top: -170px;
+            margin-left: -100px;
         }
 
         .card-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: 1fr; /* Single column on mobile */
-            gap: 15px;
-            padding: 0 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         .card {
             background-color: white;
             border: 2px solid #673ab7;
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
-            height: 150px; /* Reduced height for mobile */
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -353,13 +448,12 @@
             z-index: 1;
         }
 
-        .card:hover:before,
-        .card:active:before {
+        .card:hover:before {
             background: rgba(103, 58, 183, 0.7);
         }
 
         .card h3 {
-            font-size: 18px; /* Mobile size */
+            font-size: 24px;
             font-weight: bold;
             color: white;
             margin: 0;
@@ -369,24 +463,28 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
-        .card:hover h3,
-        .card:active h3 {
-            transform: scale(1.05);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(103, 58, 183, 0.4);
         }
 
-        /* Sidebar Sections - Mobile optimized */
+        .card:hover h3 {
+            transform: scale(1.1);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+
+        /* Sidebar Sections - Static Style */
         .sidebar-section {
             background-color: white;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border: 1px solid #e0e0e0;
-            border-radius: 5px;
         }
 
         .sidebar-title-static {
             background-color: #6c757d;
             color: white;
-            padding: 10px 15px;
-            font-size: 14px;
+            padding: 12px 15px;
+            font-size: 16px;
             font-weight: bold;
             margin: 0;
         }
@@ -398,17 +496,15 @@
 
         .sidebar-item-static {
             display: block;
-            padding: 10px 15px; /* Increased touch target */
+            padding: 8px 15px;
             color: #333;
             text-decoration: none;
             border-bottom: 1px solid #e9ecef;
-            font-size: 13px;
+            font-size: 14px;
             transition: all 0.2s ease;
-            touch-action: manipulation; /* Better touch response */
         }
 
-        .sidebar-item-static:hover,
-        .sidebar-item-static:active {
+        .sidebar-item-static:hover {
             background-color: #e9ecef;
             color: #495057;
         }
@@ -417,27 +513,24 @@
             border-bottom: none;
         }
 
-        /* Programmes Section - Mobile optimized */
+        /* Programmes Section */
         .programmes-section {
-            margin-top: 30px;
-            margin-bottom: 20px;
+            margin-top: 50px;
+            margin-bottom: 40px;
         }
 
         .programmes-header {
-            font-size: 24px; /* Mobile size */
+            font-size: 32px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-bottom: 3px solid #673ab7;
-            padding-bottom: 8px;
-            text-align: center;
+            padding-bottom: 10px;
         }
 
         .programme-section {
             background-color: #673ab7;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            overflow: hidden;
         }
 
         .programme-tabs {
@@ -447,16 +540,15 @@
         }
 
         .programme-tab {
-            padding: 12px 30px; /* Reduced for mobile */
+            padding: 15px 80px;
             text-align: center;
             background-color: #673ab7;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             transition: all 0.3s ease;
-            touch-action: manipulation;
         }
 
         .programme-tab.active {
@@ -464,40 +556,43 @@
             color: #673ab7;
         }
 
+        .programme-tab:hover:not(.active) {
+            background-color: #7b1fa2;
+        }
+
         .programme-content {
             background-color: white;
             padding: 0;
-            border: none;
+            border: 2px solid #673ab7;
             margin: 0;
         }
 
         .programme-title-bar {
             background-color: #e1bee7;
-            padding: 12px 15px;
+            padding: 15px 20px;
             text-align: left;
-            font-size: 16px; /* Mobile size */
+            font-size: 18px;
             font-weight: bold;
             color: #333;
             margin: 0;
         }
        
-        .programme-title-bar-dup {
+        .programme-title-bar-dup{
             background-color: white;
-            padding: 12px 15px;
+            padding: 15px 20px;
             text-align: left;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             color: #333;
             margin: 0;
         }
 
-        /* Programme details - Mobile stack */
         .programme-details {
             display: grid;
-            grid-template-columns: 1fr; /* Stack on mobile */
+            grid-template-columns: 1fr 1fr 1fr;
             background-color: white;
-            padding: 15px;
-            gap: 20px;
+            padding: 20px;
+            gap: 30px;
         }
 
         .detail-section {
@@ -505,23 +600,23 @@
         }
 
         .detail-section h4 {
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
 
         .detail-section p {
-            font-size: 14px;
+            font-size: 15px;
             color: #555;
             line-height: 1.5;
         }
 
         .eligibility-syllabus {
             display: grid;
-            grid-template-columns: 1fr; /* Stack on mobile */
-            gap: 20px;
-            padding: 15px;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 20px;
             background-color: white;
         }
 
@@ -533,21 +628,21 @@
 
         .eligibility-section h4,
         .syllabus-section h4 {
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
 
         .eligibility-section p {
-            font-size: 14px;
+            font-size: 15px;
             color: #555;
             line-height: 1.5;
         }
 
         .syllabus-buttons {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -555,49 +650,86 @@
             background-color: #28a745;
             color: white;
             border: none;
-            padding: 8px 14px; /* Mobile touch targets */
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            touch-action: manipulation;
         }
 
-        .syllabus-btn:hover,
-        .syllabus-btn:active {
+        .syllabus-btn:hover {
             background-color: #218838;
             transform: translateY(-1px);
         }
 
         .higher-studies {
             background-color: white;
-            padding: 15px;
+            padding: 20px;
             border-top: none;
         }
 
         .higher-studies h4 {
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
 
         .higher-studies p {
-            font-size: 14px;
+            font-size: 15px;
             color: #555;
             line-height: 1.5;
         }
 
-        /* TABLET STYLES */
-        @media (min-width: 768px) {
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            /* Show mobile menu button */
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            /* Show mobile sidebar components */
+            .mobile-sidebar-overlay {
+                display: block;
+            }
+
+            .mobile-sidebar {
+                display: block;
+            }
+
+            /* Hide desktop sidebar */
+            .sidebar {
+                display: none;
+            }
+
+            /* Adjust main content */
+            .content-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .main-content {
+                flex: 1;
+            }
+
+            .section {
+                margin-left: 0;
+            }
+
+            .card-container-section {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            /* Carousel adjustments */
             .carousel-container {
                 height: 400px;
             }
 
             .carousel-title {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .carousel-subtitle {
@@ -605,19 +737,17 @@
             }
 
             .carousel-description {
-                font-size: 14px;
-                display: block; /* Show on tablet+ */
-            }
-
-            .carousel-btn {
-                padding: 10px 20px;
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .carousel-arrow {
                 width: 40px;
                 height: 40px;
                 font-size: 18px;
+            }
+
+            .carousel-thumbnails {
+                gap: 5px;
             }
 
             .carousel-thumbnail {
@@ -625,327 +755,115 @@
                 height: 30px;
             }
 
-            .header-banner {
-                height: 80px;
-            }
-
             .header-title {
-                font-size: 24px;
-            }
-
-            .content-wrapper {
-                flex-direction: row;
-                gap: 30px;
-            }
-
-            .main-content {
-                flex: 2;
-                order: 1;
-            }
-
-            .sidebar {
-                flex: 0.8;
-                order: 2;
-            }
-
-            .card-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .card {
-                height: 180px;
-            }
-
-            .card h3 {
-                font-size: 20px;
-            }
-
-            .section-title {
                 font-size: 28px;
-            }
-
-            .programme-details {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .eligibility-syllabus {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* DESKTOP STYLES */
-        @media (min-width: 1024px) {
-            .carousel-container {
-                height: 500px;
-            }
-
-            .carousel-title {
-                font-size: 48px;
-            }
-
-            .carousel-subtitle {
-                font-size: 24px;
-            }
-
-            .carousel-description {
-                font-size: 18px;
-            }
-
-            .carousel-btn {
-                padding: 12px 30px;
-                font-size: 16px;
-            }
-
-            .carousel-arrow {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-            }
-
-            .carousel-arrow.prev {
-                left: 20px;
-            }
-
-            .carousel-arrow.next {
-                right: 20px;
-            }
-
-            .carousel-thumbnails {
-                gap: 10px;
-                bottom: 20px;
-            }
-
-            .carousel-thumbnail {
-                width: 60px;
-                height: 40px;
-            }
-
-            .carousel-counter {
-                top: 20px;
-                left: 20px;
-                padding: 5px 15px;
-                font-size: 14px;
-            }
-
-            .carousel-play-btn {
-                top: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-
-            .header-banner {
-                height: 100px;
-            }
-
-            .header-title {
-                font-size: 36px;
-            }
-
-            .container {
-                padding: 0 20px;
-            }
-
-            .content-wrapper {
-                gap: 40px;
-                margin-top: 40px;
-                margin-bottom: 40px;
-            }
-
-            .section {
-                margin-bottom: 40px;
-            }
-
-            .section-title {
-                font-size: 32px;
-                margin-bottom: 20px;
-                padding-bottom: 10px;
-            }
-
-            .section-content p {
-                font-size: 16px;
-                line-height: 1.8;
-                text-align: justify;
-            }
-
-            .section-content ol li {
-                font-size: 16px;
-                margin-bottom: 10px;
-            }
-
-            .dynamic-content {
-                min-height: 400px;
-            }
-
-            .card-container-section {
-                padding: 40px 0;
-                margin-top: 40px;
+                padding: 15px 25px;
             }
 
             .card-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                padding: 0 20px;
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .card {
-                height: 200px;
-                padding: 30px 20px;
+                padding: 25px 15px;
             }
 
             .card h3 {
-                font-size: 24px;
-            }
-
-            .sidebar-item-static {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-
-            .programmes-section {
-                margin-top: 50px;
-                margin-bottom: 40px;
-            }
-
-            .programmes-header {
-                font-size: 32px;
-                margin-bottom: 20px;
+                font-size: 18px;
             }
 
             .programme-tab {
-                padding: 15px 80px;
-                font-size: 18px;
-            }
-
-            .programme-title-bar,
-            .programme-title-bar-dup {
-                padding: 15px 20px;
-                font-size: 18px;
+                font-size: 16px;
+                padding: 12px 15px;
             }
 
             .programme-details {
-                grid-template-columns: repeat(3, 1fr);
-                padding: 20px;
-                gap: 30px;
-            }
-
-            .detail-section h4 {
-                font-size: 18px;
-                margin-bottom: 12px;
-            }
-
-            .detail-section p {
-                font-size: 15px;
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             .eligibility-syllabus {
-                padding: 20px;
-                gap: 30px;
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .eligibility-section h4,
-            .syllabus-section h4 {
-                font-size: 18px;
-                margin-bottom: 12px;
-            }
-
-            .eligibility-section p {
-                font-size: 15px;
-            }
-
-            .syllabus-btn {
-                padding: 10px 18px;
-                font-size: 14px;
-            }
-
-            .higher-studies {
-                padding: 20px;
-            }
-
-            .higher-studies h4 {
-                font-size: 18px;
-                margin-bottom: 12px;
-            }
-
-            .higher-studies p {
-                font-size: 15px;
+            /* Adjust carousel play button position to avoid conflict with menu button */
+            .carousel-play-btn {
+                top: 80px;
             }
         }
 
-        /* LARGE DESKTOP */
-        @media (min-width: 1440px) {
+        @media (max-width: 480px) {
+            .mobile-sidebar {
+                width: 280px;
+            }
+            
             .card-container {
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-        }
-
-        /* High DPI / Retina Display Optimizations */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .carousel-slide,
-            .card {
-                background-size: cover;
-            }
-        }
-
-        /* Touch device optimizations */
-        @media (hover: none) and (pointer: coarse) {
-            .card:hover {
-                transform: none;
-            }
-            
-            .card:active {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 20px rgba(103, 58, 183, 0.3);
-            }
-            
-            .carousel-btn:hover {
-                transform: none;
-            }
-            
-            .carousel-btn:active {
-                transform: translateY(-1px);
-            }
-        }
-
-        /* Improve accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            .carousel-track {
-                transition: none;
-            }
-            
-            .card,
-            .carousel-btn,
-            .carousel-arrow {
-                transition: none;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .sidebar-section {
-                background-color: #2d2d2d;
-                border-color: #404040;
-            }
-            
-            .sidebar-content-static {
-                background-color: #1a1a1a;
-            }
-            
-            .sidebar-item-static {
-                color: #e0e0e0;
-            }
-            
-            .sidebar-item-static:hover {
-                background-color: #404040;
-                color: #f0f0f0;
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">⋮</button>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="mobile-sidebar-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            Menu
+            <button class="mobile-close-btn" onclick="closeMobileMenu()">×</button>
+        </div>
+        <div class="mobile-sidebar-content">
+            <!-- Overview Section with Sub-items -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title-static">Overview</h3>
+                <div class="sidebar-content-static">
+                    <a href="#" class="sidebar-item-static" onclick="showContent('overview-content'); closeMobileMenu();" data-content="overview">▷ About</a>
+                    <a href="#" class="sidebar-item-static" onclick="showContent('vision-content'); closeMobileMenu();" data-content="vision">▷ Vision</a>
+                    <a href="#" class="sidebar-item-static" onclick="showContent('mission-content'); closeMobileMenu();" data-content="mission">▷ Mission</a>
+                    <a href="#" class="sidebar-item-static" onclick="showContent('peo-content'); closeMobileMenu();" data-content="peo">▷ PEO</a>
+                </div>
+            </div>
+
+            <!-- Faculty & Staff Section -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title-static">Faculty & Staff</h3>
+                <div class="sidebar-content-static">
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ List of Faculty Members</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Supporting Staff</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Awards and Recognitions</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Faculty Members Pursuing Ph.D</a>
+                </div>
+            </div>
+
+            <!-- Infrastructure Section -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title-static">Infrastructure</h3>
+                <div class="sidebar-content-static">
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Laboratory</a>
+                </div>
+            </div>
+
+            <!-- Research & Consultancy Section -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title-static">Research & Consultancy</h3>
+                <div class="sidebar-content-static">
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Funded Projects</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ MoU Signed</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Consultancy Services</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ List of Publications</a>
+                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Societies and Chapters</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Carousel Header -->
     <div class="carousel-container" id="carousel">
         <div class="carousel-track" id="carouselTrack">
@@ -953,14 +871,14 @@
         </div>
 
         <!-- Navigation Arrows -->
-        <button class="carousel-arrow prev" onclick="previousSlide()" aria-label="Previous slide">‹</button>
-        <button class="carousel-arrow next" onclick="nextSlide()" aria-label="Next slide">›</button>
+        <button class="carousel-arrow prev" onclick="previousSlide()">❮</button>
+        <button class="carousel-arrow next" onclick="nextSlide()">❯</button>
 
         <!-- Slide Counter -->
         <div class="carousel-counter" id="slideCounter">1 / 10</div>
 
         <!-- Auto-play Control -->
-        <button class="carousel-play-btn" id="playBtn" onclick="toggleAutoplay()" aria-label="Toggle autoplay">⏸️</button>
+        <button class="carousel-play-btn" id="playBtn" onclick="toggleAutoplay()">⏸️</button>
 
         <!-- Thumbnail Navigation -->
         <div class="carousel-thumbnails" id="thumbnailContainer">
@@ -975,52 +893,7 @@
 
     <div class="container">
         <div class="content-wrapper">
-            <!-- Sidebar - Appears first on mobile -->
-            <div class="sidebar">
-                <!-- Overview Section with Sub-items -->
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title-static">Overview</h3>
-                    <div class="sidebar-content-static">
-                        <a href="#" class="sidebar-item-static active" onclick="showContent('overview-content')" data-content="overview">▷ About</a>
-                        <a href="#" class="sidebar-item-static" onclick="showContent('vision-content')" data-content="vision">▷ Vision</a>
-                        <a href="#" class="sidebar-item-static" onclick="showContent('mission-content')" data-content="mission">▷ Mission</a>
-                        <a href="#" class="sidebar-item-static" onclick="showContent('peo-content')" data-content="peo">▷ PEO</a>
-                    </div>
-                </div>
-
-                <!-- Faculty & Staff Section -->
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title-static">Faculty & Staff</h3>
-                    <div class="sidebar-content-static">
-                        <a href="#" class="sidebar-item-static">▷ List of Faculty Members</a>
-                        <a href="#" class="sidebar-item-static">▷ Supporting Staff</a>
-                        <a href="#" class="sidebar-item-static">▷ Awards and Recognitions</a>
-                        <a href="#" class="sidebar-item-static">▷ Faculty Members Pursuing Ph.D</a>
-                    </div>
-                </div>
-
-                <!-- Infrastructure Section -->
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title-static">Infrastructure</h3>
-                    <div class="sidebar-content-static">
-                        <a href="#" class="sidebar-item-static">▷ Laboratory</a>
-                    </div>
-                </div>
-
-                <!-- Research & Consultancy Section -->
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title-static">Research & Consultancy</h3>
-                    <div class="sidebar-content-static">
-                        <a href="#" class="sidebar-item-static">▷ Funded Projects</a>
-                        <a href="#" class="sidebar-item-static">▷ MoU Signed</a>
-                        <a href="#" class="sidebar-item-static">▷ Consultancy Services</a>
-                        <a href="#" class="sidebar-item-static">▷ List of Publications</a>
-                        <a href="#" class="sidebar-item-static">▷ Societies and Chapters</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content - Appears second on mobile -->
+            <!-- Main Content -->
             <div class="main-content">
                 <!-- Main content will be populated based on sidebar selection -->
                 <div class="dynamic-content">
@@ -1061,39 +934,86 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Card Container - Full Width Section -->
+                <div class="card-container-section">
+                    <div class="card-container">
+                        <div class="card" style="background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');" onclick="window.location.href='infrastructure.html';">
+                            <h3>Infra</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');" onclick="window.location.href='acheivements.html';">
+                            <h3>Achievements</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');" onclick="window.location.href='placements.html';">
+                            <h3>Placements</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='internships.html';">
+                            <h3>Internships</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='higher-studies.html';">
+                            <h3>Higher Studies</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                            <h3>Products Developed</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                            <h3>Notable Alumni</h3>
+                        </div>
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                            <h3>Patents</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop Sidebar - Hidden on Mobile -->
+            <div class="sidebar">
+                <!-- Overview Section with Sub-items -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Overview</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static" onclick="showContent('overview-content')" data-content="overview">▷ About</a>
+                        <a href="#" class="sidebar-item-static" onclick="showContent('vision-content')" data-content="vision">▷ Vision</a>
+                        <a href="#" class="sidebar-item-static" onclick="showContent('mission-content')" data-content="mission">▷ Mission</a>
+                        <a href="#" class="sidebar-item-static" onclick="showContent('peo-content')" data-content="peo">▷ PEO</a>
+                    </div>
+                </div>
+
+                <!-- Faculty & Staff Section -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Faculty & Staff</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static">▷ List of Faculty Members</a>
+                        <a href="#" class="sidebar-item-static">▷ Supporting Staff</a>
+                        <a href="#" class="sidebar-item-static">▷ Awards and Recognitions</a>
+                        <a href="#" class="sidebar-item-static">▷ Faculty Members Pursuing Ph.D</a>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Section -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Infrastructure</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static">▷ Laboratory</a>
+                    </div>
+                </div>
+
+                <!-- Research & Consultancy Section -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title-static">Research & Consultancy</h3>
+                    <div class="sidebar-content-static">
+                        <a href="#" class="sidebar-item-static">▷ Funded Projects</a>
+                        <a href="#" class="sidebar-item-static">▷ MoU Signed</a>
+                        <a href="#" class="sidebar-item-static">▷ Consultancy Services</a>
+                        <a href="#" class="sidebar-item-static">▷ List of Publications</a>
+                        <a href="#" class="sidebar-item-static">▷ Societies and Chapters</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Card Container - Full Width Section -->
-        <div class="card-container-section">
-            <div class="card-container">
-                <div class="card" style="background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');" onclick="window.location.href='infrastructure.html';">
-                    <h3>Infra</h3>
-                </div>
-                <div class="card" style="background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');" onclick="window.location.href='acheivements.html';">
-                    <h3>Achievements</h3>
-                </div>
-                <div class="card" style="background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');" onclick="window.location.href='placements.html';">
-                    <h3>Placements</h3>
-                </div>
-                <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='internships.html';">
-                    <h3>Internships</h3>
-                </div>
-                <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='higher-studies.html';">
-                    <h3>Higher Studies</h3>
-                </div>
-                <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
-                    <h3>Products Developed</h3>
-                </div>
-                <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
-                    <h3>Notable Alumni</h3>
-                </div>
-                <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
-                    <h3>Patents</h3>
-                </div>
-            </div>
-        </div>
-
+    <div class="container">
         <!-- Programmes Section -->
         <div class="programmes-section">
             <h1 class="programmes-header">Programmes Offered</h1>
@@ -1104,7 +1024,9 @@
                 </div>
                
                 <div class="programme-content">
-                    <div class="programme-title-bar-dup"></div>
+                   
+                    <div class="programme-title-bar-dup">
+                     </div>
                    
                     <div class="programme-title-bar">
                         B.E. - MECHATRONICS ENGINEERING
@@ -1151,7 +1073,43 @@
     </div>
 
     <script>
+        // ===== MOBILE MENU FUNCTIONALITY =====
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobileOverlay');
+            const sidebar = document.getElementById('mobileSidebar');
+            
+            overlay.classList.toggle('show');
+            sidebar.classList.toggle('show');
+            
+            // Prevent body scrolling when menu is open
+            if (sidebar.classList.contains('show')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMobileMenu() {
+            const overlay = document.getElementById('mobileOverlay');
+            const sidebar = document.getElementById('mobileSidebar');
+            
+            overlay.classList.remove('show');
+            sidebar.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Close mobile menu when clicking on overlay
+        document.getElementById('mobileOverlay').addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+
         // ===== CAROUSEL CONFIGURATION =====
+        // Add your carousel image URLs here - just replace the URLs in this array
         const CAROUSEL_IMAGES = [
             'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
             'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg',
@@ -1165,6 +1123,7 @@
             'https://www.bitsathy.ac.in/wp-content/uploads/mechatroncis.jpg'
         ];
 
+        // Customize slide content here
         const SLIDE_CONTENT = [
             {
                 title: 'MECHATRONICS ENGINEERING',
@@ -1362,24 +1321,16 @@
             }
         }
 
-        // Pause on hover (only for desktop)
-        if (window.matchMedia('(hover: hover)').matches) {
-            document.getElementById('carousel').addEventListener('mouseenter', stopAutoPlay);
-            document.getElementById('carousel').addEventListener('mouseleave', () => {
-                if (isAutoPlaying) startAutoPlay();
-            });
-        }
+        // Pause on hover
+        document.getElementById('carousel').addEventListener('mouseenter', stopAutoPlay);
+        document.getElementById('carousel').addEventListener('mouseleave', () => {
+            if (isAutoPlaying) startAutoPlay();
+        });
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                previousSlide();
-            }
-            if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                nextSlide();
-            }
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
             if (e.key === ' ') {
                 e.preventDefault();
                 toggleAutoplay();
@@ -1389,27 +1340,23 @@
         // Touch/swipe support
         let startX = 0;
         let endX = 0;
-        let startTime = 0;
 
         document.getElementById('carousel').addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-            startTime = Date.now();
-        }, { passive: true });
+        });
 
         document.getElementById('carousel').addEventListener('touchend', (e) => {
             endX = e.changedTouches[0].clientX;
             const diff = startX - endX;
-            const timeDiff = Date.now() - startTime;
             
-            // Only trigger if it's a quick swipe (not a slow drag)
-            if (Math.abs(diff) > 50 && timeDiff < 300) {
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
                 if (diff > 0) {
                     nextSlide();
                 } else {
                     previousSlide();
                 }
             }
-        }, { passive: true });
+        });
 
         // ===== EXISTING PAGE FUNCTIONALITY =====
         function showContent(contentId) {
@@ -1428,7 +1375,7 @@
                 }, 10);
             }
            
-            // Update active sidebar item
+            // Update active sidebar item for both desktop and mobile
             document.querySelectorAll('.sidebar-item-static').forEach(item => {
                 item.classList.remove('active');
             });
@@ -1436,6 +1383,13 @@
             // Add active class to clicked item
             if (event && event.target) {
                 event.target.classList.add('active');
+                // Also update the corresponding item in the other sidebar (desktop/mobile)
+                const dataContent = event.target.getAttribute('data-content');
+                if (dataContent) {
+                    document.querySelectorAll(`[data-content="${dataContent}"]`).forEach(item => {
+                        item.classList.add('active');
+                    });
+                }
             }
         }
 
@@ -1462,18 +1416,10 @@
             // Initialize carousel
             initCarousel();
             
-            // Set initial active sidebar item
-            const initialItem = document.querySelector('[data-content="overview"]');
-            if (initialItem) {
-                initialItem.classList.add('active');
-            }
-
-            // Add loading animation
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.5s ease';
-                document.body.style.opacity = '1';
-            }, 100);
+            // Set initial active sidebar item for both desktop and mobile
+            document.querySelectorAll('[data-content="overview"]').forEach(item => {
+                item.classList.add('active');
+            });
         });
 
         // Smooth scrolling for any anchor links
@@ -1483,39 +1429,19 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Handle orientation change
-        window.addEventListener('orientationchange', function() {
-            setTimeout(() => {
-                updateCarousel();
-            }, 100);
+        // Handle window resize to ensure proper display
+        window.addEventListener('resize', function() {
+            // Close mobile menu on resize to desktop
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
         });
-
-        // Intersection Observer for animations
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
-
-            // Observe cards for animation
-            document.querySelectorAll('.card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
-        }
     </script>
 </body>
 </html>
