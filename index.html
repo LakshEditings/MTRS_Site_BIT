@@ -17,92 +17,6 @@
             color: #333;
         }
 
-        /* Mobile Menu Button - Hidden on Desktop */
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(103, 58, 183, 0.9);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-btn:hover {
-            background: rgba(103, 58, 183, 1);
-            transform: scale(1.1);
-        }
-
-        /* Mobile Sidebar Overlay */
-        .mobile-sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .mobile-sidebar-overlay.show {
-            opacity: 1;
-        }
-
-        /* Mobile Sidebar */
-        .mobile-sidebar {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100%;
-            background: #f8f9fa;
-            z-index: 1001;
-            transition: right 0.3s ease;
-            overflow-y: auto;
-            box-shadow: -4px 0 12px rgba(0,0,0,0.2);
-        }
-
-        .mobile-sidebar.show {
-            right: 0;
-        }
-
-        .mobile-sidebar-header {
-            background: #673ab7;
-            color: white;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            position: relative;
-        }
-
-        .mobile-close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .mobile-sidebar-content {
-            padding: 0;
-        }
-
         /* Carousel Styles */
         .carousel-container {
             position: relative;
@@ -683,47 +597,8 @@
             line-height: 1.5;
         }
 
-        /* Mobile Responsive Design */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            /* Show mobile menu button */
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            /* Show mobile sidebar components */
-            .mobile-sidebar-overlay {
-                display: block;
-            }
-
-            .mobile-sidebar {
-                display: block;
-            }
-
-            /* Hide desktop sidebar */
-            .sidebar {
-                display: none;
-            }
-
-            /* Adjust main content */
-            .content-wrapper {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .main-content {
-                flex: 1;
-            }
-
-            .section {
-                margin-left: 0;
-            }
-
-            .card-container-section {
-                margin-left: 0;
-                margin-top: 20px;
-            }
-
-            /* Carousel adjustments */
             .carousel-container {
                 height: 400px;
             }
@@ -760,6 +635,24 @@
                 padding: 15px 25px;
             }
 
+            .content-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .sidebar {
+                margin-right: 0;
+            }
+
+            .section {
+                margin-left: 0;
+            }
+
+            .card-container-section {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
             .card-container {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -787,18 +680,9 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-
-            /* Adjust carousel play button position to avoid conflict with menu button */
-            .carousel-play-btn {
-                top: 80px;
-            }
         }
 
         @media (max-width: 480px) {
-            .mobile-sidebar {
-                width: 280px;
-            }
-            
             .card-container {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -807,63 +691,6 @@
     </style>
 </head>
 <body>
-    <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">⋮</button>
-
-    <!-- Mobile Sidebar Overlay -->
-    <div class="mobile-sidebar-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
-
-    <!-- Mobile Sidebar -->
-    <div class="mobile-sidebar" id="mobileSidebar">
-        <div class="mobile-sidebar-header">
-            Menu
-            <button class="mobile-close-btn" onclick="closeMobileMenu()">×</button>
-        </div>
-        <div class="mobile-sidebar-content">
-            <!-- Overview Section with Sub-items -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title-static">Overview</h3>
-                <div class="sidebar-content-static">
-                    <a href="#" class="sidebar-item-static" onclick="showContent('overview-content'); closeMobileMenu();" data-content="overview">▷ About</a>
-                    <a href="#" class="sidebar-item-static" onclick="showContent('vision-content'); closeMobileMenu();" data-content="vision">▷ Vision</a>
-                    <a href="#" class="sidebar-item-static" onclick="showContent('mission-content'); closeMobileMenu();" data-content="mission">▷ Mission</a>
-                    <a href="#" class="sidebar-item-static" onclick="showContent('peo-content'); closeMobileMenu();" data-content="peo">▷ PEO</a>
-                </div>
-            </div>
-
-            <!-- Faculty & Staff Section -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title-static">Faculty & Staff</h3>
-                <div class="sidebar-content-static">
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ List of Faculty Members</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Supporting Staff</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Awards and Recognitions</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Faculty Members Pursuing Ph.D</a>
-                </div>
-            </div>
-
-            <!-- Infrastructure Section -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title-static">Infrastructure</h3>
-                <div class="sidebar-content-static">
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Laboratory</a>
-                </div>
-            </div>
-
-            <!-- Research & Consultancy Section -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title-static">Research & Consultancy</h3>
-                <div class="sidebar-content-static">
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Funded Projects</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ MoU Signed</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Consultancy Services</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ List of Publications</a>
-                    <a href="#" class="sidebar-item-static" onclick="closeMobileMenu();">▷ Societies and Chapters</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Carousel Header -->
     <div class="carousel-container" id="carousel">
         <div class="carousel-track" id="carouselTrack">
@@ -938,35 +765,35 @@
                 <!-- Card Container - Full Width Section -->
                 <div class="card-container-section">
                     <div class="card-container">
-                        <div class="card" style="background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');" onclick="window.location.href='infrastructure.html';">
+                        <div class="card" style="background-image: url('https://www.fischtankpr.com/wp-content/uploads/2021/07/Credit-IoT-World-Today.jpeg');" onclick="window.open('infrastructure.html', '_blank');">
                             <h3>Infra</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');" onclick="window.location.href='acheivements.html';">
+                        <div class="card" style="background-image: url('https://media.istockphoto.com/id/1166385136/vector/spotlight-on-blue-curtain-background-and-falling-golden-confetti-vector-illustration.jpg?s=612x612&w=0&k=20&c=QvC7BHECXlKRxQf4YetNXbKivOHz9Lyh3SRGE_5m6XU=');" onclick="window.open('achievements.html', '_blank');">
                             <h3>Achievements</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');" onclick="window.location.href='placements.html';">
+                        <div class="card" style="background-image: url('https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg');" onclick="window.open('placements.html', '_blank');">
                             <h3>Placements</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='internships.html';">
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.open('internships.html', '_blank');">
                             <h3>Internships</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.location.href='higher-studies.html';">
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="window.open('higher-studies.html', '_blank');">
                             <h3>Higher Studies</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="alert('Products page coming soon!');">
                             <h3>Products Developed</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="alert('Alumni page coming soon!');">
                             <h3>Notable Alumni</h3>
                         </div>
-                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');">
+                        <div class="card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0qxNPQ44KdVc7r0nr_ohAPX8exOwXV5KHw&s');" onclick="alert('Patents page coming soon!');">
                             <h3>Patents</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Desktop Sidebar - Hidden on Mobile -->
+            <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Overview Section with Sub-items -->
                 <div class="sidebar-section">
@@ -1073,41 +900,6 @@
     </div>
 
     <script>
-        // ===== MOBILE MENU FUNCTIONALITY =====
-        function toggleMobileMenu() {
-            const overlay = document.getElementById('mobileOverlay');
-            const sidebar = document.getElementById('mobileSidebar');
-            
-            overlay.classList.toggle('show');
-            sidebar.classList.toggle('show');
-            
-            // Prevent body scrolling when menu is open
-            if (sidebar.classList.contains('show')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        }
-
-        function closeMobileMenu() {
-            const overlay = document.getElementById('mobileOverlay');
-            const sidebar = document.getElementById('mobileSidebar');
-            
-            overlay.classList.remove('show');
-            sidebar.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-
-        // Close mobile menu when clicking on overlay
-        document.getElementById('mobileOverlay').addEventListener('click', closeMobileMenu);
-
-        // Close mobile menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeMobileMenu();
-            }
-        });
-
         // ===== CAROUSEL CONFIGURATION =====
         // Add your carousel image URLs here - just replace the URLs in this array
         const CAROUSEL_IMAGES = [
@@ -1375,7 +1167,7 @@
                 }, 10);
             }
            
-            // Update active sidebar item for both desktop and mobile
+            // Update active sidebar item
             document.querySelectorAll('.sidebar-item-static').forEach(item => {
                 item.classList.remove('active');
             });
@@ -1383,13 +1175,6 @@
             // Add active class to clicked item
             if (event && event.target) {
                 event.target.classList.add('active');
-                // Also update the corresponding item in the other sidebar (desktop/mobile)
-                const dataContent = event.target.getAttribute('data-content');
-                if (dataContent) {
-                    document.querySelectorAll(`[data-content="${dataContent}"]`).forEach(item => {
-                        item.classList.add('active');
-                    });
-                }
             }
         }
 
@@ -1416,10 +1201,11 @@
             // Initialize carousel
             initCarousel();
             
-            // Set initial active sidebar item for both desktop and mobile
-            document.querySelectorAll('[data-content="overview"]').forEach(item => {
-                item.classList.add('active');
-            });
+            // Set initial active sidebar item
+            const overviewItem = document.querySelector('[data-content="overview"]');
+            if (overviewItem) {
+                overviewItem.classList.add('active');
+            }
         });
 
         // Smooth scrolling for any anchor links
@@ -1433,14 +1219,6 @@
                     });
                 }
             });
-        });
-
-        // Handle window resize to ensure proper display
-        window.addEventListener('resize', function() {
-            // Close mobile menu on resize to desktop
-            if (window.innerWidth > 768) {
-                closeMobileMenu();
-            }
         });
     </script>
 </body>
