@@ -635,15 +635,14 @@
 
     <div class="container">
         <!-- Back Navigation -->
-        <div class="back-nav">
+        <!-- <div class="back-nav">
             <a href="index.html" class="back-btn">
                 ← Back to Home
             </a>
-        </div>
+        </div> -->
 
         <!-- Statistics Section -->
         <div class="stats-section" id="statsSection" style="display: none;">
-            <h2>Placement Statistics</h2>
             <div class="stats-grid" id="statsGrid">
                 <!-- Stats will be populated here -->
             </div>
@@ -658,7 +657,7 @@
                     <option value="2024">2024</option>
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
-                    <option value="2025">2025</option>
+                    <option value="2025" selected>2025</option>
                 </select>
             </div>
         </div>
@@ -1070,6 +1069,9 @@
             }, 100);
 
             const yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.value = '2025'; // Set default value to 2025
+            loadPlacements(); // Load 2025 data on page load
+
             yearDropdown.addEventListener('change', function() {
                 if (this.value) {
                     setTimeout(() => {
