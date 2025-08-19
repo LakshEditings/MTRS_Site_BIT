@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Mechatronics Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header Section */
+        .header-banner {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><rect fill="%23333" width="1200" height="300"/><g fill="%23666"><circle cx="200" cy="100" r="50" opacity="0.3"/><circle cx="400" cy="150" r="30" opacity="0.4"/><circle cx="600" cy="80" r="40" opacity="0.3"/><circle cx="800" cy="200" r="35" opacity="0.4"/><circle cx="1000" cy="120" r="45" opacity="0.3"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 60px;
+        }
+
+        .header-title {
+            background-color: rgba(103, 58, 183, 0.95);
+            color: white;
+            padding: 20px 40px;
+            font-size: 36px;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Year Selection Section */
+        .year-selection {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .year-selection h2 {
+            color: #673ab7;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .dropdown-container {
+            margin: 20px 0;
+        }
+
+        .year-dropdown {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: 2px solid #673ab7;
+            border-radius: 25px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .year-dropdown:hover {
+            background: #673ab7;
+            color: white;
+        }
+
+        .year-dropdown:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.3);
+        }
+
+        /* Cards Container */
+        .cards-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .cards-container.show {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Event Card */
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .event-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #ffc107, #ff9800);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.2);
+            border-color: #ffc107;
+        }
+
+        .event-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .event-date {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .event-location {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-body h4 {
+            color: #ffc107;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffe082;
+            padding-bottom: 5px;
+        }
+
+        .modal-body p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .team-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .team-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            transition: transform 0.2s ease;
+        }
+
+        .team-item:hover {
+            transform: translateX(5px);
+            background: #fff3cd;
+        }
+
+        .team-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .team-students {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .team-status {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .team-prize {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .team-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border: 2px solid #673ab7;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .stats-section.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 28px;
+                padding: 15px 25px;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+
+            .event-card {
+                padding: 25px 20px;
+                min-height: 180px;
+            }
+
+            .year-selection {
+                padding: 20px;
+            }
+
+            .year-selection h2 {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .year-dropdown {
+                min-width: 150px;
+                font-size: 16px;
+            }
+
+            .event-name {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <div class="header-title">Student Achievements</div>
+    </div>
+
+    <div class="container">
+        <!-- Year Selection -->
+        <div class="year-selection">
+            <h2>View Achievements by Year</h2>
+            <div class="dropdown-container">
+                <select class="year-dropdown" id="yearDropdown" onchange="loadAchievements()">
+                    <option value="">Select Year</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section" id="statsSection">
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be populated here -->
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading" style="display: none;">
+            Loading achievements data...
+        </div>
+
+        <!-- Cards Container -->
+        <div class="cards-container" id="cardsContainer">
+            <!-- Cards will be populated here -->
+        </div>
+    </div>
+
+    <!-- Modals will be dynamically added here via JS -->
+
+    <script>
+        // Sample achievements data
+        const achievementsData = {
+            2024: [
+                {
+                    id: 'robotics-2024',
+                    name: "National Robotics Competition",
+                    date: "March 15, 2024",
+                    location: "Bangalore",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Alpha",
+                                students: "Raj Patel, Priya Sharma, Arjun Kumar",
+                                status: "Winner",
+                                prize: "₹50,000 Cash Prize + Trophy",
+                                image: "https://images.unsplash.com/photo-1536148935321-c0fb0ee8e807?w=400&h=300&fit=crop"
+                            },
+                            {
+                                name: "Team Beta",
+                                students: "Sneha Reddy, Vikash Singh",
+                                status: "Runner-up",
+                                prize: "₹30,000 Cash Prize + Medals",
+                                image: "https://images.unsplash.com/photo-1569098645270-457a5f775775?w=400&h=300&fit=crop"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'hackathon-2024',
+                    name: "AI Hackathon",
+                    date: "June 20, 2024",
+                    location: "Hyderabad",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Gamma",
+                                students: "Anita Joshi, Rohit Gupta",
+                                status: "Winner",
+                                prize: "₹40,000 Cash Prize + Certificates",
+                                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+                            },
+                            {
+                                name: "Team Delta",
+                                students: "Kavya Menon, Aditya Verma",
+                                status: "Runner-up",
+                                prize: "₹20,000 Cash Prize + Memento",
+                                image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=400&h=300&fit=crop"
+                            }
+                        ]
+                    }
+                }
+            ],
+            2023: [
+                {
+                    id: 'drone-challenge-2023',
+                    name: "Drone Design Challenge",
+                    date: "April 10, 2023",
+                    location: "Chennai",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Epsilon",
+                                students: "Meera Nair, Suresh Babu",
+                                status: "Winner",
+                                prize: "₹35,000 Cash Prize + Trophy",
+                                image: "https://images.unsplash.com/photo-1506947456701-22e6436705e4?w=400&h=300&fit=crop"
+                            },
+                            {
+                                name: "Team Zeta",
+                                students: "Divya Krishna, Karthik Raj",
+                                status: "Runner-up",
+                                prize: "₹15,000 Cash Prize + Medals",
+                                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop"
+                            }
+                        ]
+                    }
+                }
+            ],
+            2022: [
+                {
+                    id: 'automation-symposium-2022',
+                    name: "Automation Symposium",
+                    date: "September 5, 2022",
+                    location: "Pune",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Eta",
+                                students: "Rahul Krishnan, Priya Nair",
+                                status: "Winner",
+                                prize: "₹25,000 Cash Prize + Certificates",
+                                image: "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=400&h=300&fit=crop"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+
+        function loadAchievements() {
+            const selectedYear = document.getElementById('yearDropdown').value;
+            const cardsContainer = document.getElementById('cardsContainer');
+            const loading = document.getElementById('loading');
+            const statsSection = document.getElementById('statsSection');
+           
+            if (!selectedYear) {
+                cardsContainer.classList.remove('show');
+                statsSection.classList.remove('show');
+                return;
+            }
+           
+            // Show loading
+            loading.style.display = 'block';
+            cardsContainer.classList.remove('show');
+            statsSection.classList.remove('show');
+           
+            // Simulate loading delay
+            setTimeout(() => {
+                loading.style.display = 'none';
+                displayAchievements(selectedYear);
+                displayStats(selectedYear);
+            }, 500);
+        }
+
+        function displayStats(year) {
+            const events = achievementsData[year] || [];
+            const statsGrid = document.getElementById('statsGrid');
+            const statsSection = document.getElementById('statsSection');
+           
+            const totalEvents = events.length;
+            const totalTeams = events.reduce((sum, event) => sum + event.details.teams.length, 0);
+            const totalStudents = events.reduce((sum, event) => {
+                return sum + event.details.teams.reduce((teamSum, team) => teamSum + team.students.split(', ').length, 0);
+            }, 0);
+           
+            statsGrid.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-number">${totalEvents}</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${totalTeams}</div>
+                    <div class="stat-label">Teams Participated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${totalStudents}</div>
+                    <div class="stat-label">Students Involved</div>
+                </div>
+            `;
+           
+            statsSection.classList.add('show');
+        }
+
+        function displayAchievements(year) {
+            const cardsContainer = document.getElementById('cardsContainer');
+            const events = achievementsData[year] || [];
+           
+            cardsContainer.innerHTML = '';
+           
+            events.forEach(event => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.onclick = () => openModal(event.id);
+                card.innerHTML = `
+                    <div class="event-name">${event.name}</div>
+                    <div class="event-date">${event.date}</div>
+                    <div class="event-location">${event.location}</div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+           
+            cardsContainer.classList.add('show');
+        }
+
+        function openModal(eventId) {
+            // Find the event data
+            let eventData;
+            Object.values(achievementsData).forEach(events => {
+                const found = events.find(e => e.id === eventId);
+                if (found) eventData = found;
+            });
+
+            if (!eventData) return;
+
+            // Create modal dynamically
+            const existingModal = document.getElementById(`${eventId}-modal`);
+            if (existingModal) {
+                existingModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                return;
+            }
+
+            const modal = document.createElement('div');
+            modal.id = `${eventId}-modal`;
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close" onclick="closeModal('${eventId}-modal')">&times;</span>
+                        <h2 class="modal-title">${eventData.name}</h2>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Event Details</h4>
+                        <p>Date: ${eventData.date}<br>Location: ${eventData.location}</p>
+                       
+                        <h4>Participating Teams</h4>
+                        <div class="team-list">
+                            ${eventData.details.teams.map(team => `
+                                <div class="team-item">
+                                    <div class="team-name">${team.name}</div>
+                                    <div class="team-students">Students: ${team.students}</div>
+                                    <div class="team-status">Status: ${team.status}</div>
+                                    <div class="team-prize">Prize: ${team.prize}</div>
+                                    <img class="team-image" src="${team.image}" alt="${team.name} Image">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Add smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.addEventListener('change', function() {
+                if (this.value) {
+                    setTimeout(() => {
+                        document.getElementById('statsSection').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 600);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

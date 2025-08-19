@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internships - Mechatronics Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header Section */
+        .header-banner {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><rect fill="%23333" width="1200" height="300"/><g fill="%23666"><circle cx="200" cy="100" r="50" opacity="0.3"/><circle cx="400" cy="150" r="30" opacity="0.4"/><circle cx="600" cy="80" r="40" opacity="0.3"/><circle cx="800" cy="200" r="35" opacity="0.4"/><circle cx="1000" cy="120" r="45" opacity="0.3"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 60px;
+        }
+
+        .header-title {
+            background-color: rgba(103, 58, 183, 0.95);
+            color: white;
+            padding: 20px 40px;
+            font-size: 36px;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Year Selection Section */
+        .year-selection {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .year-selection h2 {
+            color: #673ab7;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #673ab7;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .dropdown-container {
+            margin: 20px 0;
+        }
+
+        .year-dropdown {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: 2px solid #673ab7;
+            border-radius: 25px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+       }
+
+        .year-dropdown:hover {
+            background: #673ab7;
+            color: white;
+        }
+
+        .year-dropdown:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.3);
+        }
+
+        /* Cards Container */
+        .cards-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .cards-container.show {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Company Card */
+        .company-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .company-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+
+        .company-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(40, 167, 69, 0.2);
+            border-color: #28a745;
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        }
+
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .internship-details {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .students-count {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: auto;
+            display: inline-block;
+        }
+
+        .duration-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border: 2px solid #673ab7;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .stats-section.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 28px;
+                padding: 15px 25px;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+
+            .company-card {
+                padding: 25px 20px;
+                min-height: 230px;
+            }
+
+            .year-selection {
+                padding: 20px;
+            }
+
+            .year-selection h2 {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .year-dropdown {
+                min-width: 150px;
+                font-size: 16px;
+            }
+
+            .company-name {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="header-banner">
+        <div class="header-title">Student Internships</div>
+    </div>
+
+    <div class="container">
+        <!-- Year Selection -->
+        <div class="year-selection">
+            <h2>View Internships by Year</h2>
+            <div class="dropdown-container">
+                <select class="year-dropdown" id="yearDropdown" onchange="loadInternships()">
+                    <option value="">Select Year</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section" id="statsSection">
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be populated here -->
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading" style="display: none;">
+            Loading internship data...
+        </div>
+
+        <!-- Cards Container -->
+        <div class="cards-container" id="cardsContainer">
+            <!-- Cards will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample internship data
+        const internshipData = {
+            2024: [
+                {
+                    company: "Google",
+                    logo: "https://logo.clearbit.com/google.com",
+                    studentsCount: 8,
+                    duration: "3 months",
+                    domain: "Software Development",
+                    stipend: "₹50,000/month",
+                    location: "Bangalore"
+                },
+                {
+                    company: "Microsoft",
+                    logo: "https://logo.clearbit.com/microsoft.com",
+                    studentsCount: 6,
+                    duration: "4 months",
+                    domain: "Cloud Computing",
+                    stipend: "₹45,000/month",
+                    location: "Hyderabad"
+                },
+                {
+                    company: "Amazon",
+                    logo: "https://logo.clearbit.com/amazon.com",
+                    studentsCount: 7,
+                    duration: "3 months",
+                    domain: "Data Science",
+                    stipend: "₹48,000/month",
+                    location: "Chennai"
+                },
+                {
+                    company: "Tesla",
+                    logo: "https://logo.clearbit.com/tesla.com",
+                    studentsCount: 4,
+                    duration: "6 months",
+                    domain: "Automotive Engineering",
+                    stipend: "₹40,000/month",
+                    location: "Pune"
+                },
+                {
+                    company: "Intel",
+                    logo: "https://logo.clearbit.com/intel.com",
+                    studentsCount: 5,
+                    duration: "4 months",
+                    domain: "Hardware Design",
+                    stipend: "₹35,000/month",
+                    location: "Bangalore"
+                },
+                {
+                    company: "Apple",
+                    logo: "https://logo.clearbit.com/apple.com",
+                    studentsCount: 3,
+                    duration: "5 months",
+                    domain: "Product Design",
+                    stipend: "₹55,000/month",
+                    location: "Mumbai"
+                }
+            ],
+            2023: [
+                {
+                    company: "TCS",
+                    logo: "https://logo.clearbit.com/tcs.com",
+                    studentsCount: 12,
+                    duration: "2 months",
+                    domain: "Software Development",
+                    stipend: "₹15,000/month",
+                    location: "Chennai"
+                },
+                {
+                    company: "Infosys",
+                    logo: "https://logo.clearbit.com/infosys.com",
+                    studentsCount: 10,
+                    duration: "3 months",
+                    domain: "System Integration",
+                    stipend: "₹18,000/month",
+                    location: "Bangalore"
+                },
+                {
+                    company: "Wipro",
+                    logo: "https://logo.clearbit.com/wipro.com",
+                    studentsCount: 8,
+                    duration: "2 months",
+                    domain: "Digital Solutions",
+                    stipend: "₹16,000/month",
+                    location: "Hyderabad"
+                },
+                {
+                    company: "HCL Technologies",
+                    logo: "https://logo.clearbit.com/hcl.com",
+                    studentsCount: 9,
+                    duration: "3 months",
+                    domain: "Engineering Solutions",
+                    stipend: "₹17,000/month",
+                    location: "Noida"
+                },
+                {
+                    company: "Cognizant",
+                    logo: "https://logo.clearbit.com/cognizant.com",
+                    studentsCount: 7,
+                    duration: "2 months",
+                    domain: "Business Process",
+                    stipend: "₹14,000/month",
+                    location: "Pune"
+                }
+            ],
+            2022: [
+                {
+                    company: "L&T",
+                    logo: "https://logo.clearbit.com/larsentoubro.com",
+                    studentsCount: 15,
+                    duration: "6 weeks",
+                    domain: "Construction & Engineering",
+                    stipend: "₹12,000/month",
+                    location: "Mumbai"
+                },
+                {
+                    company: "Mahindra",
+                    logo: "https://logo.clearbit.com/mahindra.com",
+                    studentsCount: 8,
+                    duration: "8 weeks",
+                    domain: "Automotive",
+                    stipend: "₹15,000/month",
+                    location: "Chennai"
+                },
+                {
+                    company: "Bosch",
+                    logo: "https://logo.clearbit.com/bosch.com",
+                    studentsCount: 6,
+                    duration: "3 months",
+                    domain: "Automotive Technology",
+                    stipend: "₹20,000/month",
+                    location: "Bangalore"
+                },
+                {
+                    company: "Siemens",
+                    logo: "https://logo.clearbit.com/siemens.com",
+                    studentsCount: 4,
+                    duration: "4 months",
+                    domain: "Industrial Automation",
+                    stipend: "₹18,000/month",
+                    location: "Pune"
+                }
+            ]
+        };
+
+        function loadInternships() {
+            const selectedYear = document.getElementById('yearDropdown').value;
+            const cardsContainer = document.getElementById('cardsContainer');
+            const loading = document.getElementById('loading');
+            const statsSection = document.getElementById('statsSection');
+           
+            if (!selectedYear) {
+                cardsContainer.classList.remove('show');
+                statsSection.classList.remove('show');
+                return;
+            }
+           
+            // Show loading
+            loading.style.display = 'block';
+            cardsContainer.classList.remove('show');
+            statsSection.classList.remove('show');
+           
+            // Simulate loading delay
+            setTimeout(() => {
+                loading.style.display = 'none';
+                displayInternships(selectedYear);
+                displayStats(selectedYear);
+            }, 500);
+        }
+
+        function displayStats(year) {
+            const companies = internshipData[year] || [];
+            const statsGrid = document.getElementById('statsGrid');
+            const statsSection = document.getElementById('statsSection');
+           
+            const totalStudents = companies.reduce((sum, company) => sum + company.studentsCount, 0);
+            const totalCompanies = companies.length;
+            const avgStipend = companies.reduce((sum, company) => {
+                const stipend = parseInt(company.stipend.replace(/[₹,\/month]/g, ''));
+                return sum + stipend;
+            }, 0) / totalCompanies;
+           
+            statsGrid.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-number">${totalStudents}</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${totalCompanies}</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">₹${Math.round(avgStipend/1000)}K</div>
+                    <div class="stat-label">Avg. Stipend/month</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Completion Rate</div>
+                </div>
+            `;
+           
+            statsSection.classList.add('show');
+        }
+
+        function displayInternships(year) {
+            const cardsContainer = document.getElementById('cardsContainer');
+            const companies = internshipData[year] || [];
+           
+            cardsContainer.innerHTML = '';
+           
+            companies.forEach(company => {
+                const card = document.createElement('div');
+                card.className = 'company-card';
+                card.innerHTML = `
+                    <div class="duration-badge">${company.duration}</div>
+                    <div class="company-logo">
+                        <img src="${company.logo}" alt="${company.company}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRjNGNEY2Ii8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNjczYWI3Ii8+Cjwvc3ZnPg=='">
+                    </div>
+                    <div class="company-name">${company.company}</div>
+                    <div class="internship-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Domain:</span> ${company.domain}
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Stipend:</span> ${company.stipend}
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Location:</span> ${company.location}
+                        </div>
+                    </div>
+                    <div class="students-count">${company.studentsCount} Students Placed</div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+           
+            cardsContainer.classList.add('show');
+        }
+
+        // Add smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.addEventListener('change', function() {
+                if (this.value) {
+                    setTimeout(() => {
+                        document.getElementById('statsSection').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 600);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
