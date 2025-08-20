@@ -136,13 +136,13 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(45deg, #ffc107, #ff9800);
+            background: linear-gradient(45deg, #673ab7, #9c27b0);
         }
 
         .event-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.2);
-            border-color: #ffc107;
+            box-shadow: 0 15px 40px rgba(103, 58, 183, 0.2);
+            border-color: #673ab7;
         }
 
         .event-name {
@@ -158,10 +158,11 @@
             margin-bottom: 10px;
         }
 
-        .event-location {
-            font-size: 14px;
-            color: #666;
-            font-style: italic;
+        .event-position {
+            font-size: 18px;
+            color: #673ab7;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         /* Modal Styles */
@@ -200,7 +201,7 @@
         }
 
         .modal-header {
-            background: linear-gradient(135deg, #ffc107, #ff9800);
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
             color: white;
             padding: 20px 30px;
             border-radius: 15px 15px 0 0;
@@ -233,10 +234,10 @@
         }
 
         .modal-body h4 {
-            color: #ffc107;
+            color: #673ab7;
             font-size: 18px;
             margin-bottom: 15px;
-            border-bottom: 2px solid #ffe082;
+            border-bottom: 2px solid #d1c4e9;
             padding-bottom: 5px;
         }
 
@@ -256,13 +257,13 @@
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid #673ab7;
             transition: transform 0.2s ease;
         }
 
         .team-item:hover {
             transform: translateX(5px);
-            background: #fff3cd;
+            background: #ede7f6;
         }
 
         .team-name {
@@ -350,7 +351,7 @@
         .stat-item {
             padding: 20px;
             border-radius: 10px;
-            background: linear-gradient(135deg, #ffc107, #ff9800);
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
             color: white;
         }
 
@@ -434,8 +435,7 @@
                 <select class="year-dropdown" id="yearDropdown" onchange="loadAchievements()">
                     <option value="">Select Year</option>
                     <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
+                    <option value="2025" selected>2025</option>
                 </select>
             </div>
         </div>
@@ -461,98 +461,301 @@
     <!-- Modals will be dynamically added here via JS -->
 
     <script>
-        // Sample achievements data
+        // Achievements data based on provided documents
         const achievementsData = {
             2024: [
                 {
-                    id: 'robotics-2024',
-                    name: "National Robotics Competition",
-                    date: "March 15, 2024",
-                    location: "Bangalore",
+                    id: 'robotex-2024',
+                    name: "Robotex India National Championship",
+                    date: "November 8, 2024",
+                    position: "Winner",
                     details: {
                         teams: [
                             {
-                                name: "Team Alpha",
-                                students: "Raj Patel, Priya Sharma, Arjun Kumar",
-                                status: "Winner",
-                                prize: "₹50,000 Cash Prize + Trophy",
-                                image: "https://images.unsplash.com/photo-1536148935321-c0fb0ee8e807?w=400&h=300&fit=crop"
-                            },
-                            {
-                                name: "Team Beta",
-                                students: "Sneha Reddy, Vikash Singh",
-                                status: "Runner-up",
-                                prize: "₹30,000 Cash Prize + Medals",
-                                image: "https://images.unsplash.com/photo-1569098645270-457a5f775775?w=400&h=300&fit=crop"
+                                name: "Team Megavolt",
+                                students: "Nithish Kumar R, Gowtham M",
+                                status: "1st Prize - Entrepreneurship Challenge",
+                                prize: "₹50,000 Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Robotex+2024"
                             }
                         ]
                     }
                 },
                 {
-                    id: 'hackathon-2024',
-                    name: "AI Hackathon",
-                    date: "June 20, 2024",
-                    location: "Hyderabad",
+                    id: 'arduinohackathon-2024',
+                    name: "Arduino Hackathon 2024",
+                    date: "October 5, 2024",
+                    position: "Winner & Runner-up",
                     details: {
                         teams: [
                             {
-                                name: "Team Gamma",
-                                students: "Anita Joshi, Rohit Gupta",
-                                status: "Winner",
-                                prize: "₹40,000 Cash Prize + Certificates",
-                                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "1st Prize - Maze Solver",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Arduino+Hackathon+2024"
                             },
                             {
-                                name: "Team Delta",
-                                students: "Kavya Menon, Aditya Verma",
-                                status: "Runner-up",
-                                prize: "₹20,000 Cash Prize + Memento",
-                                image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=400&h=300&fit=crop"
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "2nd Prize - Arduino Hackathon",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Arduino+Hackathon+2024"
+                            },
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "3rd Prize - Arduino Hackathon",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Arduino+Hackathon+2024"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'janatics-2024',
+                    name: "Janatics Automation Skill Challenge 2024",
+                    date: "September 18-20, 2024",
+                    position: "Special Category Award",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Hrithik J R (7376211MC115)",
+                                status: "Special Category Award - CAD Design",
+                                prize: "Award",
+                                image: "https://via.placeholder.com/400x300?text=Janatics+2024"
+                            },
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Gowrishangar I R (7376221MC503)",
+                                status: "Special Category Award - Innovative Design",
+                                prize: "Award",
+                                image: "https://via.placeholder.com/400x300?text=Janatics+2024"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'robocon-2024',
+                    name: "DD Robocon India 2024",
+                    date: "July 14, 2024",
+                    position: "Participated",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Godwit",
+                                students: "Unnamed Team Members",
+                                status: "Shortlisted for Round 2, Draw vs NITK",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=Robocon+2024"
+                            },
+                            {
+                                name: "DOT Robotics",
+                                students: "Unnamed Team Members",
+                                status: "Shortlisted for Round 2, Score 99/100",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=Robocon+2024"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'intec-2024',
+                    name: "CODISSIA INTEC 2024",
+                    date: "June 16, 2024",
+                    position: "Participated",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "Showcased Innovative Products",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=INTEC+2024"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'shaastra-2024',
+                    name: "Shaastra 2025 Tech & Innovation Fair",
+                    date: "February 10, 2024",
+                    position: "4th Place",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team MEG Zcuit",
+                                students: "Unnamed Team Members",
+                                status: "4th Place",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=Shaastra+2025"
                             }
                         ]
                     }
                 }
             ],
-            2023: [
+            2025: [
                 {
-                    id: 'drone-challenge-2023',
-                    name: "Drone Design Challenge",
-                    date: "April 10, 2023",
-                    location: "Chennai",
+                    id: 'robocon-2025',
+                    name: "DD Robocon India 2025",
+                    date: "March 5, 2025",
+                    position: "Participated",
                     details: {
                         teams: [
                             {
-                                name: "Team Epsilon",
-                                students: "Meera Nair, Suresh Babu",
-                                status: "Winner",
-                                prize: "₹35,000 Cash Prize + Trophy",
-                                image: "https://images.unsplash.com/photo-1506947456701-22e6436705e4?w=400&h=300&fit=crop"
-                            },
-                            {
-                                name: "Team Zeta",
-                                students: "Divya Krishna, Karthik Raj",
-                                status: "Runner-up",
-                                prize: "₹15,000 Cash Prize + Medals",
-                                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop"
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "Shortlisted for Round 1",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=Robocon+2025"
                             }
                         ]
                     }
-                }
-            ],
-            2022: [
+                },
                 {
-                    id: 'automation-symposium-2022',
-                    name: "Automation Symposium",
-                    date: "September 5, 2022",
-                    location: "Pune",
+                    id: 'pragyan-cube-2025',
+                    name: "Pragyan Cube Open 2025",
+                    date: "February 22-23, 2025",
+                    position: "Runner-up",
                     details: {
                         teams: [
                             {
-                                name: "Team Eta",
-                                students: "Rahul Krishnan, Priya Nair",
-                                status: "Winner",
-                                prize: "₹25,000 Cash Prize + Certificates",
-                                image: "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=400&h=300&fit=crop"
+                                name: "Team Robotics and Automation",
+                                students: "Dharshini S (7376232AD130)",
+                                status: "2nd Prize - Fastest Female Cuber",
+                                prize: "Award by WCA",
+                                image: "https://via.placeholder.com/400x300?text=Pragyan+Cube+2025"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'kurukshetra-2025',
+                    name: "Kurukshetra 2025",
+                    date: "February 23, 2025",
+                    position: "Runner-up",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Mohan Prasanth N (7376231EE137), Bharanidharan S (7376231EE109), Keerthivasan J (7376231EC189), Pugalenthi G (7376221MC133)",
+                                status: "2nd Place - Robo Soccer & Robo Race",
+                                prize: "Cash Prizes",
+                                image: "https://via.placeholder.com/400x300?text=Kurukshetra+2025"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'ojass-2025',
+                    name: "Ojass 25",
+                    date: "February 21, 2025",
+                    position: "Winner & Runner-up",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team E-Groots",
+                                students: "Unnamed Team Members",
+                                status: "1st Place - Trace Bot Challenge",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Ojass+25"
+                            },
+                            {
+                                name: "Team E-Groots",
+                                students: "Unnamed Team Members",
+                                status: "1st Place - Startup Ideathon",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Ojass+25"
+                            },
+                            {
+                                name: "Team E-Groots",
+                                students: "Unnamed Team Members",
+                                status: "2nd Place - Maze Marathon",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Ojass+25"
+                            },
+                            {
+                                name: "Team E-Groots",
+                                students: "Unnamed Team Members",
+                                status: "3rd Place - Maze Marathon",
+                                prize: "Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Ojass+25"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'petrichor-2025',
+                    name: "PETRICHOR 2025",
+                    date: "February 10, 2025",
+                    position: "Winner & Third Place",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "1st Place",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=PETRICHOR+2025"
+                            },
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "3rd Place",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=PETRICHOR+2025"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'shaastra-roborun-2025',
+                    name: "Shaastra RoboRun 2025",
+                    date: "February 10, 2025",
+                    position: "Winner",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team E-Groots",
+                                students: "Unnamed Team Members",
+                                status: "1st Place",
+                                prize: "₹30,000 Cash Prize",
+                                image: "https://via.placeholder.com/400x300?text=Shaastra+RoboRun+2025"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'quantum-robot-2025',
+                    name: "Quantum Robot Version 1.0 Development",
+                    date: "February 10, 2025",
+                    position: "Participated",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "Product Development",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=Quantum+Robot+2025"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 'amr-2024',
+                    name: "Autonomous Mobile Robot Development",
+                    date: "July 9, 2024",
+                    position: "Participated",
+                    details: {
+                        teams: [
+                            {
+                                name: "Team Robotics and Automation",
+                                students: "Unnamed Team Members",
+                                status: "Product Development",
+                                prize: "N/A",
+                                image: "https://via.placeholder.com/400x300?text=AMR+2024"
                             }
                         ]
                     }
@@ -593,7 +796,7 @@
             const totalEvents = events.length;
             const totalTeams = events.reduce((sum, event) => sum + event.details.teams.length, 0);
             const totalStudents = events.reduce((sum, event) => {
-                return sum + event.details.teams.reduce((teamSum, team) => teamSum + team.students.split(', ').length, 0);
+                return sum + event.details.teams.reduce((teamSum, team) => teamSum + (team.students ? team.students.split(', ').length : 0), 0);
             }, 0);
            
             statsGrid.innerHTML = `
@@ -627,7 +830,7 @@
                 card.innerHTML = `
                     <div class="event-name">${event.name}</div>
                     <div class="event-date">${event.date}</div>
-                    <div class="event-location">${event.location}</div>
+                    <div class="event-position">${event.position}</div>
                 `;
                 cardsContainer.appendChild(card);
             });
@@ -664,16 +867,16 @@
                     </div>
                     <div class="modal-body">
                         <h4>Event Details</h4>
-                        <p>Date: ${eventData.date}<br>Location: ${eventData.location}</p>
+                        <p>Date: ${eventData.date}<br>Location: ${eventData.location || 'N/A'}</p>
                        
                         <h4>Participating Teams</h4>
                         <div class="team-list">
                             ${eventData.details.teams.map(team => `
                                 <div class="team-item">
                                     <div class="team-name">${team.name}</div>
-                                    <div class="team-students">Students: ${team.students}</div>
+                                    <div class="team-students">Students: ${team.students || 'Unnamed Team Members'}</div>
                                     <div class="team-status">Status: ${team.status}</div>
-                                    <div class="team-prize">Prize: ${team.prize}</div>
+                                    <div class="team-prize">Prize: ${team.prize || 'N/A'}</div>
                                     <img class="team-image" src="${team.image}" alt="${team.name} Image">
                                 </div>
                             `).join('')}
@@ -715,6 +918,9 @@
         // Add smooth scrolling
         document.addEventListener('DOMContentLoaded', function() {
             const yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.value = '2025'; // Set default value to 2025
+            loadAchievements(); // Load 2025 data on page load
+
             yearDropdown.addEventListener('change', function() {
                 if (this.value) {
                     setTimeout(() => {

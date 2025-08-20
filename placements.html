@@ -774,7 +774,7 @@
                 }
             ],
             2025: [
-            {
+                {
                     name: "Sukanth C",
                     photo: "Assets/SUKANT C.png?w==150&h=150&fit=crop&crop=face",
                     company: "Zoho",
@@ -789,90 +789,105 @@
                     name: "Lavanya",
                     photo: "Assets/LAVANYA B.png?w=150&h=150&fit=crop&crop=face",
                     company: "ALSTOM",
-                    package: "₹6.8 LPA"},
+                    package: "₹6.8 LPA"
+                },
                 {
                     "name": "Nithish Kumar R",
                     "photo": "Assets/NITHISH KUMAR R.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Gowtham M",
                     "photo": "Assets/GOWTHAM M.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Maanu G",
                     "photo": "Assets/MAANU G.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Kabil Nivas M",
                     "photo": "Assets/KABIL NIVAS M.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Mohamed Aslam G",
                     "photo": "Assets/MOHAMED ASLAM G.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Sri Dharshan P",
                     "photo": "Assets/SRI DHARSHAN P.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Rohith S",
                     "photo": "Assets/ROHITH S.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Sabari M",
                     "photo": "Assets/SABARI M.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Gowtham Sri M",
                     "photo": "Assets/GOWTHAM SRI M.jpeg?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Pravin S B",
                     "photo": "Assets/PRAVIN S B.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Sukant C",
                     "photo": "Assets/SUKANT C.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Ranjith A",
                     "photo": "Assets/RANJITH A.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Lavanya B",
                     "photo": "Assets/LAVANYA B.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     "name": "Jana Sruti R",
                     "photo": "Assets/JANA SRUTI R.png?w=150&h=150&fit=crop&crop=face",
                     "company": "Haritha Techserve",
-                    "package": "3 LPA"
+                    "package": "3 LPA",
+                    "role": "Design Engineer"
                 },
                 {
                     company: "ASHOK LEYLAND",
@@ -1097,6 +1112,9 @@
             cardsContainer.innerHTML = '';
             
             students.forEach(student => {
+                if (!student.role && !student.name) {
+                    return; // Skip entries with undefined roles and no name
+                }
                 const card = document.createElement('div');
                 card.className = 'student-card';
 
@@ -1109,7 +1127,7 @@
                         <div class="student-name">${student.name}</div>
                         <div class="company-name">${student.company}</div>
                         <div class="placement-details">
-                            <div>Role: ${student.role}</div>
+                            <div>Role: ${student.role || ''}</div>
                         </div>
                         <div class="package-info">${student.package}</div>
                     `;
