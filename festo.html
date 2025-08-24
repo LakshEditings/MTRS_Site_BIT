@@ -18,28 +18,34 @@
         }
 
         /* Header Section */
-        .header-banner {
-            position: relative;
-            height: 400px; /* Reduced from 600px, adjust as needed */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Assets/FESTO.jpg');
-            background-size: contain; /* Changed from cover to contain */
-            background-position: center;
-            background-repeat: no-repeat; /* Added to prevent tiling */
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            padding-left: 60px;
-        }
+    .header-banner {
+        position: relative;
+        height: 400px;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Assets/FESTO.jpg');
+        background-size: 132% 100%; /* Stretches the image to fill the container fully, ignoring aspect ratio */
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center; /* Centered alignment for a neat look */
+        justify-content: flex-start;
+        padding-left: 60px;
+        overflow: hidden; /* Prevents any overflow from stretching */
+        border-radius: 10px; /* Adds a subtle rounded corner for a pleasant effect */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    }
 
-        .header-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 400px; /* Matches .header-banner height */
-            background: inherit;
-            z-index: 1;
-        }
+    .header-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 400px;
+        object-fit: cover; /*fills the banner*/
+        object-position: center;
+        z-index: 1;
+        background-size: 100% 100%; /* Matches the banner's full-scale approach */
+        opacity: 0.9; /* Slight transparency for a balanced look with the gradient */
+    }
 
         .header-title {
             background-color: rgba(103, 58, 183, 0.95);
@@ -56,9 +62,9 @@
 
         /* Main Container */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
         }
 
         /* Back Navigation */
@@ -197,6 +203,7 @@
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
+            overflow: hidden;
         }
 
         .station-card:hover {
@@ -213,22 +220,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .station-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(103, 58, 183, 0.8), rgba(156, 39, 176, 0.8));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .station-card:hover .station-image::before {
-            opacity: 1;
         }
 
         .station-content {
@@ -275,18 +266,17 @@
             text-align: justify;
         }
 
-        /* Image Modal Styles */
-        .image-modal {
+        /* Modal Styles */
+        .modal {
             display: none;
             position: fixed;
-            z-index: 2000;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.8);
             animation: fadeIn 0.3s ease;
-            overflow-y: auto;
         }
 
         @keyframes fadeIn {
@@ -294,71 +284,76 @@
             to { opacity: 1; }
         }
 
-        .image-modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
             max-width: 700px;
-            max-height: 50vh;
-            object-fit: contain;
-            animation: slideIn 0.3s ease;
-            border-radius: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .modal-header {
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: -20px -20px 20px -20px;
         }
 
-        .image-modal-close {
+        .close {
             color: white;
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 40px;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 2001;
         }
 
-        .image-modal-close:hover {
+        .close:hover {
             opacity: 0.7;
         }
 
-        .image-modal-caption {
-            color: white;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 24px;
-            font-weight: bold;
+        .modal-body {
+            padding: 0 20px 20px 20px;
         }
 
-        .image-modal-description {
-            color: white;
-            text-align: center;
-            margin: 10px 20px;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .image-modal-specs {
-            color: white;
-            text-align: left;
-            margin: 20px 40px;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .image-modal-specs h4 {
+        .modal-body h4 {
+            color: #673ab7;
             font-size: 18px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #673ab7;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d1c4e9;
             padding-bottom: 5px;
         }
 
-        .image-modal-specs ul {
+        .modal-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .modal-specs ul {
             list-style-type: disc;
             padding-left: 20px;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: auto;
+            max-height: 300px; /* Ensures image fits within modal while maintaining aspect ratio */
+            object-fit: contain; /* Ensures the entire image is visible, maintaining proportions */
+            display: block;
+            margin-bottom: 20px;
         }
 
         /* Mobile Responsive Design */
@@ -370,7 +365,6 @@
         }
 
         @media (max-width: 768px) {
-            /* Header adjustments */
             .header-banner {
                 height: 400px;
                 padding-left: 20px;
@@ -385,12 +379,10 @@
                 word-wrap: break-word;
             }
 
-            /* Container adjustments */
             .container {
-                padding: 0 15px;
+                padding: 0 20px;
             }
 
-            /* Hero section adjustments */
             .hero-section {
                 padding: 40px 20px;
                 margin: 20px 0;
@@ -411,7 +403,6 @@
                 line-height: 1.6;
             }
 
-            /* Section adjustments */
             .overview-section {
                 margin: 40px 0;
             }
@@ -435,11 +426,6 @@
                 line-height: 1.7;
             }
 
-            /* Stations grid adjustments */
-            .stations-section {
-                margin: 40px 0;
-            }
-
             .stations-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -448,10 +434,6 @@
 
             .station-card {
                 margin-bottom: 10px;
-            }
-
-            .station-card:hover {
-                transform: translateY(-5px) scale(1.01);
             }
 
             .station-image {
@@ -470,7 +452,6 @@
                 font-size: 13px;
             }
 
-            /* Learning section adjustments */
             .learning-section {
                 padding: 30px 20px;
                 margin: 40px 0;
@@ -485,47 +466,18 @@
                 line-height: 1.6;
             }
 
-            /* Modal adjustments */
-            .image-modal-content {
-                width: 90%;
-                max-height: 40vh;
+            .modal-content {
+                width: 95%;
+                max-width: 600px;
+                margin: 2% auto;
             }
 
-            .image-modal-close {
-                top: 10px;
-                right: 15px;
-                font-size: 30px;
-            }
-
-            .image-modal-caption {
-                font-size: 20px;
-                margin-top: 15px;
-            }
-
-            .image-modal-description {
-                margin: 8px 15px;
-                font-size: 14px;
-            }
-
-            .image-modal-specs {
-                margin: 15px 20px;
-                font-size: 13px;
-            }
-
-            .image-modal-specs h4 {
-                font-size: 16px;
-            }
-
-            /* Back button adjustments */
-            .back-btn {
-                font-size: 14px;
-                padding: 10px 20px;
-                gap: 8px;
+            .modal-image img {
+                max-height: 200px;
             }
         }
 
         @media (max-width: 480px) {
-            /* Extra small screen adjustments */
             .header-banner {
                 height: 300px;
                 padding-left: 15px;
@@ -539,7 +491,7 @@
             }
 
             .container {
-                padding: 0 10px;
+                padding: 0 15px;
             }
 
             .hero-section {
@@ -574,10 +526,6 @@
                 font-size: 14px;
             }
 
-            .stations-grid {
-                gap: 15px;
-            }
-
             .station-image {
                 min-height: 150px;
             }
@@ -606,37 +554,43 @@
                 font-size: 14px;
             }
 
-            .image-modal-content {
-                width: 95%;
-                max-height: 35vh;
+            .modal-content {
+                width: 90%;
+                max-width: 450px;
+                margin: 5% auto;
+                padding: 15px;
             }
 
-            .image-modal-close {
-                font-size: 25px;
+            .modal-header {
+                font-size: 20px;
+                padding: 10px 15px;
+                margin: -15px -15px 15px -15px;
             }
 
-            .image-modal-caption {
-                font-size: 18px;
+            .close {
+                top: 5px;
+                right: 15px;
+                font-size: 24px;
             }
 
-            .image-modal-description {
+            .modal-body h4 {
+                font-size: 16px;
+            }
+
+            .modal-body p {
                 font-size: 13px;
-                margin: 5px 10px;
             }
 
-            .image-modal-specs {
-                margin: 10px 15px;
+            .modal-specs ul {
                 font-size: 12px;
             }
 
-            .back-btn {
-                font-size: 13px;
-                padding: 8px 15px;
+            .modal-image img {
+                max-height: 150px;
             }
         }
 
         @media (max-width: 360px) {
-            /* Very small screen adjustments */
             .header-title {
                 font-size: 20px;
                 padding: 10px 15px;
@@ -655,7 +609,6 @@
             }
         }
 
-        /* Touch device optimizations */
         @media (hover: none) and (pointer: coarse) {
             .station-card:hover {
                 transform: none;
@@ -665,7 +618,6 @@
             .station-card:active {
                 transform: translateY(-2px) scale(0.98);
             }
-
             .back-btn:hover {
                 transform: none;
             }
@@ -676,7 +628,6 @@
             }
         }
 
-        /* High DPI screen adjustments */
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
             .header-banner {
                 background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Assets/FESTO.jpg');
@@ -690,27 +641,8 @@
         <div class="header-title">FESTO Center of Excellence</div>
     </div>
 
+    <!-- Main Container -->
     <div class="container">
-        <!-- Back Navigation -->
-        <div class="back-nav">
-            <a href="infrastructure.html" class="back-btn">
-                ← Back to Infrastructure
-            </a>
-        </div>
-
-        <!-- Hero Section -->
-        <div class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">FESTO</h1>
-                <p class="hero-subtitle">Industrial Automation Center of Excellence</p>
-                <p class="hero-description">
-                    Experience the future of industrial automation with our state-of-the-art FESTO facility. 
-                    This center bridges the gap between theoretical knowledge and practical industrial applications, 
-                    providing hands-on experience with cutting-edge automation systems.
-                </p>
-            </div>
-        </div>
-
         <!-- Overview Section -->
         <div class="overview-section">
             <h2 class="section-title">Overview</h2>
@@ -734,7 +666,27 @@
         <div class="stations-section">
             <h2 class="section-title">Key Features & Stations</h2>
             <div class="stations-grid">
-                <div class="station-card" onclick="openImageModal('Assets/MPS_Distribution.jpg', 'Distribution Station', 'Advanced material distribution and supply systems for automated production lines.', '<ul><li>Separates workpieces from stack magazine</li><li>Transports via conveyor belt</li><li>Features vacuum suction cup and double-acting cylinder</li><li>Inductive sensors for position detection</li><li>Through-beam sensor for filling level</li><li>Power: 24 V DC</li><li>Compressed air: 6 bar</li></ul>')">
+                <div class="station-card" onclick="openModal('pneumaticTrainer', 'Pneumatic Trainer Kit', 'The Pneumatic Trainer Kit is an educational system for learning pneumatic control and automation techniques. It provides hands-on experience with pneumatic circuits and actuators, ideal for foundational automation training.', '<ul><li>Features multiple pneumatic actuators for versatile training</li><li>Includes pressure regulators and valves for precise control</li><li>Supports manual and automated operation modes</li><li>Power: 24 V DC, low energy consumption</li><li>Compressed air: 6 bar, industry-standard</li><li>Includes training modules for circuit design</li></ul>', 'Assets/PneumaticTrainer.webp')">
+                    <div class="station-image" style="background-image: url('Assets/PneumaticTrainer.webp');"></div>
+                    <div class="station-content">
+                        <h3 class="station-title">Pneumatic Trainer Kit</h3>
+                        <p class="station-description">
+                            Educational system for learning pneumatic control and automation techniques.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="station-card" onclick="openModal('hydraulicTrainer', 'Hydraulic Trainer Kit', 'The Hydraulic Trainer Kit is designed for mastering hydraulic circuits and control systems. It provides hands-on training in hydraulic system design and operation, ideal for advanced automation education.', '<ul><li>Includes hydraulic pumps and cylinders for robust training</li><li>Features pressure and flow control for precise operation</li><li>Supports PLC integration for automated control</li><li>Power: 24 V DC, energy-efficient</li><li>Hydraulic pressure: 50 bar, industry-standard</li><li>Includes training modules for hydraulic circuit design</li></ul>', 'Assets/hydralic_trainer_kit.jpg')">
+                    <div class="station-image" style="background-image: url('Assets/hydralic_trainer_kit.jpg');"></div>
+                    <div class="station-content">
+                        <h3 class="station-title">Hydraulic Trainer Kit</h3>
+                        <p class="station-description">
+                            Training system for mastering hydraulic circuits and control systems.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="station-card" onclick="openModal('distribution', 'Distribution Station', 'The Distribution Station is designed to automate material handling for industrial production lines, ensuring efficient supply chain management. It handles the separation and transport of workpieces with precision, utilizing advanced pneumatic systems and sensors for seamless operation. Ideal for training in automation and logistics.', '<ul><li>Separates workpieces from stack magazine</li><li>Transports via conveyor belt with high reliability</li><li>Features vacuum suction cup and double-acting cylinder for precise handling</li><li>Inductive sensors for accurate position detection</li><li>Through-beam sensor for real-time filling level monitoring</li><li>Power: 24 V DC, low energy consumption</li><li>Compressed air: 6 bar, optimized for industrial applications</li><li>Supports integration with Industry 4.0 systems</li></ul>', 'Assets/MPS_Distribution.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_Distribution.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Distribution Station</h3>
@@ -744,7 +696,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_Measuring.jpg', 'Measuring Station', 'Precision measurement and quality control systems for industrial applications.', '<ul><li>Measures workpiece height with precision</li><li>Rejects non-compliant workpieces</li><li>Uses optical SOEG sensor (pre-10/2018) or SOEL laser sensor (post-10/2018)</li><li>PLC integration for quality control</li><li>Power: 24 V DC</li></ul>')">
+                <div class="station-card" onclick="openModal('measuring', 'Measuring Station', 'The Measuring Station provides precision measurement and quality control for industrial applications, ensuring compliance with strict standards. It uses advanced sensor technology to measure workpiece dimensions and reject non-compliant parts, making it essential for quality assurance training.', '<ul><li>Measures workpiece height with high precision (±0.1 mm accuracy)</li><li>Rejects non-compliant workpieces automatically</li><li>Uses optical SOEG sensor (pre-10/2018) or SOEL laser sensor (post-10/2018) for enhanced accuracy</li><li>PLC integration for real-time quality control and data logging</li><li>Power: 24 V DC, energy-efficient design</li><li>Supports automated feedback loops for process optimization</li></ul>', 'Assets/MPS_Measuring.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_Measuring.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Measuring Station</h3>
@@ -754,7 +706,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_Handling.jpg', 'Handling Station', 'Automated material handling systems with pneumatic and servo-driven components.', '<ul><li>Pneumatic gripper for material transfer</li><li>Lifting cylinder for vertical movement</li><li>Light barrier for workpiece detection</li><li>PLC communication with adjacent stations</li><li>Power: 24 V DC</li></ul>')">
+                <div class="station-card" onclick="openModal('handling', 'Handling Station', 'The Handling Station automates material transfer with pneumatic and servo-driven components, designed for high-speed and reliable operation. It facilitates training in robotic handling and system integration, simulating real-world industrial scenarios.', '<ul><li>Pneumatic gripper for secure material transfer</li><li>Lifting cylinder for smooth vertical movement</li><li>Light barrier for accurate workpiece detection</li><li>PLC communication with adjacent stations for seamless workflow</li><li>Power: 24 V DC, optimized for continuous operation</li><li>Supports high-speed handling up to 60 cycles per minute</li></ul>', 'Assets/MPS_Handling.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_Handling.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Handling Station</h3>
@@ -764,8 +716,8 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_Separation.jpg', 'Sorting Station', 'Intelligent sorting and classification systems with advanced sensor technology.', '<ul><li>Sorts workpieces by borehole depth</li><li>Two material flow outputs</li><li>Advanced sensors for classification</li><li>PLC-controlled sorting logic</li><li>Power: 24 V DC</li></ul>')">
-                    <div class="station-image" style="background-image: url('Assets/MPS_Sepearation.jpg');"></div>
+                <div class="station-card" onclick="openModal('sorting', 'Sorting Station', 'The Sorting Station uses intelligent sensor technology to classify and sort workpieces based on specific criteria, such as borehole depth. It is ideal for training in automation logic and sensor-based sorting systems, with applications in smart manufacturing.', '<ul><li>Sorts workpieces by borehole depth with high accuracy</li><li>Two material flow outputs for efficient sorting</li><li>Advanced sensors for precise classification</li><li>PLC-controlled sorting logic for customizable operations</li><li>Power: 24 V DC, low power consumption</li><li>Supports real-time data processing for Industry 4.0</li></ul>', 'Assets/MPS_Separation.jpg')">
+                    <div class="station-image" style="background-image: url('Assets/MPS_Separation.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Sorting Station</h3>
                         <p class="station-description">
@@ -774,7 +726,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_Robot.jpg', 'Robot Station', 'Industrial robotics and automation systems for manufacturing applications.', '<ul><li>6-axis industrial robot for assembly</li><li>Automated workpiece handling</li><li>Integrated with MPS system</li><li>Power: 24 V DC</li><li>Supports Industry 4.0 protocols</li></ul>')">
+                <div class="station-card" onclick="openModal('robot', 'Robot Station', 'The Robot Station features a 6-axis industrial robot for advanced automation tasks, including assembly and material handling. It is designed to train students in robotic programming and integration within modern manufacturing systems.', '<ul><li>6-axis industrial robot for flexible assembly tasks</li><li>Automated workpiece handling with high precision</li><li>Integrated with MPS system for seamless operation</li><li>Power: 24 V DC, energy-efficient</li><li>Supports Industry 4.0 protocols for smart factory integration</li><li>Programmable via standard robotic interfaces</li></ul>', 'Assets/MPS_Robot.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_Robot.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Robot Station</h3>
@@ -784,7 +736,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_packing.jpg', 'Packing Station', 'Automated packaging solutions with integrated quality control systems.', '<ul><li>Automates packaging with quality checks</li><li>Pneumatic actuators for handling</li><li>Integrated sensors for verification</li><li>PLC integration</li><li>Power: 24 V DC</li></ul>')">
+                <div class="station-card" onclick="openModal('packing', 'Packing Station', 'The Packing Station automates packaging processes with integrated quality control, ensuring efficient and error-free operations. It is designed for training in automated packaging systems and quality verification techniques.', '<ul><li>Automates packaging with real-time quality checks</li><li>Pneumatic actuators for reliable handling</li><li>Integrated sensors for verification of package integrity</li><li>PLC integration for automated control</li><li>Power: 24 V DC, optimized for high throughput</li><li>Supports up to 50 packages per minute</li></ul>', 'Assets/MPS_packing.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_packing.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Packing Station</h3>
@@ -794,7 +746,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_storage.jpg', 'Storing Station', 'Advanced warehouse automation and storage management systems.', '<ul><li>Stores up to 48 workpieces or boxes</li><li>Automated receiving and dispatch</li><li>PLC-controlled storage management</li><li>Power: 24 V DC</li><li>Supports automated retrieval</li></ul>')">
+                <div class="station-card" onclick="openModal('storing', 'Storing Station', 'The Storing Station provides advanced warehouse automation for efficient storage and retrieval of workpieces. It is ideal for training in automated storage systems and logistics management within smart factories.', '<ul><li>Stores up to 48 workpieces or boxes with high density</li><li>Automated receiving and dispatch for streamlined operations</li><li>PLC-controlled storage management for real-time tracking</li><li>Power: 24 V DC, energy-efficient design</li><li>Supports automated retrieval with high accuracy</li><li>Integrates with warehouse management systems</li></ul>', 'Assets/MPS_storage.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_storage.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Storing Station</h3>
@@ -804,7 +756,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_ProcessControl1.jpg', 'Process Control 1', 'Basic process control systems with PLC integration and HMI interfaces.', '<ul><li>PLC-based process control</li><li>HMI for operator interface</li><li>Analog and digital sensors</li><li>Power: 24 V DC</li><li>Basic automation training</li></ul>')">
+                <div class="station-card" onclick="openModal('process1', 'Process Control 1', 'The Process Control 1 Station introduces students to basic process control systems, featuring PLC integration and HMI interfaces. It is designed for foundational training in automation and control system design.', '<ul><li>PLC-based process control for reliable operation</li><li>HMI for intuitive operator interface</li><li>Analog and digital sensors for process monitoring</li><li>Power: 24 V DC, low energy consumption</li><li>Basic automation training for beginners</li><li>Supports real-time process adjustments</li></ul>', 'Assets/Process Control.jpg')">
                     <div class="station-image" style="background-image: url('Assets/Process Control.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Process Control 1</h3>
@@ -814,7 +766,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_ProcessControl2.jpg', 'Process Control 2', 'Advanced process control applications with SCADA integration.', '<ul><li>SCADA system integration</li><li>Advanced process monitoring</li><li>PLC with network communication</li><li>Power: 24 V DC</li><li>Real-time data visualization</li></ul>')">
+                <div class="station-card" onclick="openModal('process2', 'Process Control 2', 'The Process Control 2 Station offers advanced process control training with SCADA integration, enabling real-time monitoring and control. It is ideal for advanced automation and data visualization training.', '<ul><li>SCADA system integration for comprehensive monitoring</li><li>Advanced process monitoring with high accuracy</li><li>PLC with network communication for remote access</li><li>Power: 24 V DC, optimized for continuous operation</li><li>Real-time data visualization for process optimization</li><li>Supports complex automation scenarios</li></ul>', 'Assets/Process Control.jpg')">
                     <div class="station-image" style="background-image: url('Assets/Process Control.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Process Control 2</h3>
@@ -824,7 +776,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/MPS_Modelling.jpg', 'Modelling Station', 'System modeling and simulation environment for process optimization.', '<ul><li>Simulation software integration</li><li>Process modeling tools</li><li>PLC-compatible interface</li><li>Power: 24 V DC</li><li>Supports Industry 4.0 simulations</li></ul>')">
+                <div class="station-card" onclick="openModal('modelling', 'Modelling Station', 'The Modelling Station provides a simulation environment for process optimization and system modeling. It is designed for training in digital twins and Industry 4.0 simulation techniques.', '<ul><li>Simulation software integration for virtual testing</li><li>Process modeling tools for system design</li><li>PLC-compatible interface for real-world integration</li><li>Power: 24 V DC, energy-efficient</li><li>Supports Industry 4.0 simulations for smart manufacturing</li><li>Allows testing of multiple process scenarios</li></ul>', 'Assets/MPS_Modelling.jpg')">
                     <div class="station-image" style="background-image: url('Assets/MPS_Modelling.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Modelling Station</h3>
@@ -834,7 +786,7 @@
                     </div>
                 </div>
 
-                <div class="station-card" onclick="openImageModal('Assets/Bottling.jpg', 'Bottling Station', 'Automated bottling system for high-speed production lines with quality assurance.', '<ul><li>Automates bottle filling and capping</li><li>Integrated sensors for level and cap detection</li><li>PLC-controlled operation</li><li>Power: 24 V DC</li><li>Compressed air: 6 bar</li><li>Supports up to 100 bottles per minute</li></ul>')">
+                <div class="station-card" onclick="openModal('bottling', 'Bottling Station', 'The Bottling Station automates high-speed bottle filling and capping with integrated quality assurance, ideal for training in high-throughput production systems. It ensures precision and reliability in automated bottling processes.', '<ul><li>Automates bottle filling and capping with high precision</li><li>Integrated sensors for level and cap detection</li><li>PLC-controlled operation for seamless automation</li><li>Power: 24 V DC, energy-efficient</li><li>Compressed air: 6 bar, optimized for high-speed operation</li><li>Supports up to 100 bottles per minute with minimal errors</li></ul>', 'Assets/Bottling.jpg')">
                     <div class="station-image" style="background-image: url('Assets/Bottling.jpg');"></div>
                     <div class="station-content">
                         <h3 class="station-title">Bottling Station</h3>
@@ -843,69 +795,80 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="station-card" onclick="openModal('texsonicRobot', 'Texsonic Robot', 'The Texsonic Robot is an advanced 6-axis robotic arm designed for precision tasks in industrial automation. It supports complex operations and is ideal for training in robotic programming and system integration.', '<ul><li>6-axis robotic arm with high precision (±0.05 mm accuracy)</li><li>Supports multiple end-effector configurations for flexibility</li><li>Integrated with PLC systems for seamless automation</li><li>Power: 24 V DC, energy-efficient</li><li>Maximum reach: 900 mm, suitable for various tasks</li><li>Programmable for custom automation sequences</li></ul>', 'Assets/TexsonicRobot.jpg')">
+                    <div class="station-image" style="background-image: url('Assets/TexsonicRobot.jpg');"></div>
+                    <div class="station-content">
+                        <h3 class="station-title">Texsonic Robot</h3>
+                        <p class="station-description">
+                            Advanced robotic arm for precision tasks in industrial automation.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Image Modal -->
-    <div id="image-modal" class="image-modal">
-        <span class="image-modal-close">&times;</span>
-        <img class="image-modal-content" id="image-modal-img">
-        <div id="image-modal-caption" class="image-modal-caption"></div>
-        <div id="image-modal-description" class="image-modal-description"></div>
-        <div id="image-modal-specs" class="image-modal-specs"></div>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <span id="modal-title"></span>
+            </div>
+            <div class="modal-body">
+                <div id="modal-image" class="modal-image"></div>
+                <h4>Station Details</h4>
+                <p id="modal-description"></p>
+                <h4>Specifications</h4>
+                <div id="modal-specs" class="modal-specs"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Image Modal functionality
-        function openImageModal(imgSrc, caption, description, specs) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('image-modal-img');
-            const modalCaption = document.getElementById('image-modal-caption');
-            const modalDescription = document.getElementById('image-modal-description');
-            const modalSpecs = document.getElementById('image-modal-specs');
+        function openModal(id, title, description, specs, imageUrl) {
+            const modal = document.getElementById('myModal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalSpecs = document.getElementById('modal-specs');
+            const modalImage = document.getElementById('modal-image');
+
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            modalSpecs.innerHTML = specs;
+            // Clear previous image and set new image
+            modalImage.innerHTML = `<img src="${imageUrl}" alt="${title} Image">`;
+
             modal.style.display = 'block';
-            modalImg.src = imgSrc;
-            modalCaption.innerText = caption;
-            modalDescription.innerText = description;
-            modalSpecs.innerHTML = '<h4>Specifications</h4>' + specs;
             document.body.style.overflow = 'hidden';
         }
 
-        function closeImageModal() {
-            document.getElementById('image-modal').style.display = 'none';
+        function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        // Close image modal when clicking the close button
-        document.querySelector('.image-modal-close').addEventListener('click', function() {
-            closeImageModal();
-        });
-
-        // Close modal when clicking outside of it
         window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('image-modal')) {
-                closeImageModal();
+            if (event.target.classList.contains('modal')) {
+                closeModal();
             }
         });
 
-        // Escape key to close modal
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                closeImageModal();
+                closeModal();
             }
         });
 
-        // Add smooth scrolling and loading animation
         document.addEventListener('DOMContentLoaded', function() {
-            // Add loading animation
             document.body.style.opacity = '0';
             setTimeout(() => {
                 document.body.style.transition = 'opacity 0.5s ease';
                 document.body.style.opacity = '1';
             }, 100);
 
-            // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -919,31 +882,27 @@
             });
         });
 
-        // Handle window resize
         window.addEventListener('resize', function() {
-            // Close modal on orientation change for mobile
-            if (document.getElementById('image-modal').style.display === 'block') {
+            if (document.getElementById('myModal').style.display === 'block') {
                 setTimeout(() => {
-                    closeImageModal();
+                    closeModal();
                 }, 100);
             }
         });
 
-        // Touch gesture support for closing modal
         let startY = 0;
         let endY = 0;
 
-        document.getElementById('image-modal').addEventListener('touchstart', function(e) {
+        document.getElementById('myModal').addEventListener('touchstart', function(e) {
             startY = e.touches[0].clientY;
         });
 
-        document.getElementById('image-modal').addEventListener('touchend', function(e) {
+        document.getElementById('myModal').addEventListener('touchend', function(e) {
             endY = e.changedTouches[0].clientY;
             const diff = startY - endY;
             
-            // Close modal on swipe up/down
             if (Math.abs(diff) > 100) {
-                closeImageModal();
+                closeModal();
             }
         });
     </script>
