@@ -918,74 +918,11 @@
         // Customize slide content here
         const SLIDE_CONTENT = [
             {
-                title: 'MECHATRONICS ENGINEERING',
-                subtitle: 'DEPARTMENT OF EXCELLENCE',
-                description: 'Innovative technology meets cutting-edge research in our state-of-the-art facilities',
-                buttonText: 'READ MORE',
-                buttonLink: '#overview-content'
-            },
-            {
-                title: 'ROBOTICS & AUTOMATION',
-                subtitle: 'FUTURE TECHNOLOGY',
-                description: 'Explore the world of intelligent systems and automated solutions',
-                buttonText: 'EXPLORE',
-                buttonLink: '#'
-            },
-            {
-                title: 'RESEARCH EXCELLENCE',
-                subtitle: 'INNOVATION DRIVEN',
-                description: 'Leading research in embedded systems and intelligent manufacturing',
-                buttonText: 'DISCOVER',
-                buttonLink: '#'
-            },
-            {
-                title: 'INDUSTRY PARTNERSHIPS',
-                subtitle: 'REAL WORLD EXPERIENCE',
-                description: 'Strong collaborations with leading industries for practical learning',
-                buttonText: 'LEARN MORE',
-                buttonLink: '#'
-            },
-            {
-                title: 'STUDENT ACHIEVEMENTS',
-                subtitle: 'SUCCESS STORIES',
-                description: 'Our students excel in competitions and secure top placements',
-                buttonText: 'VIEW ACHIEVEMENTS',
-                buttonLink: '#'
-            },
-            {
-                title: 'MODERN LABORATORIES',
-                subtitle: 'ADVANCED FACILITIES',
-                description: 'Well-equipped labs for hands-on learning and experimentation',
-                buttonText: 'EXPLORE LABS',
-                buttonLink: '#'
-            },
-            {
-                title: 'FACULTY EXPERTISE',
-                subtitle: 'EXPERIENCED MENTORS',
-                description: 'Learn from highly qualified and dedicated faculty members',
-                buttonText: 'MEET FACULTY',
-                buttonLink: '#'
-            },
-            {
-                title: 'CAREER OPPORTUNITIES',
-                subtitle: 'BRIGHT FUTURE',
-                description: 'Excellent placement records and career growth opportunities',
-                buttonText: 'VIEW PLACEMENTS',
-                buttonLink: '#'
-            },
-            {
-                title: 'INNOVATION HUB',
-                subtitle: 'CREATIVE SOLUTIONS',
-                description: 'Fostering innovation through project-based learning',
-                buttonText: 'SEE PROJECTS',
-                buttonLink: '#'
-            },
-            {
-                title: 'GLOBAL VISION',
-                subtitle: 'WORLD CLASS EDUCATION',
-                description: 'Preparing students for global challenges in engineering',
-                buttonText: 'JOIN US',
-                buttonLink: '#'
+                title: '',
+                subtitle: '',
+                description: '',
+                buttonText: '',
+                buttonLink: ''
             }
         ];
 
@@ -1019,9 +956,9 @@
                         <h1 class="carousel-title">${content.title}</h1>
                         <h2 class="carousel-subtitle">${content.subtitle}</h2>
                         <p class="carousel-description">${content.description}</p>
-                        <a href="${content.buttonLink}" class="carousel-btn">${content.buttonText} →</a>
                     </div>
                 `;
+                //<a href="${content.buttonLink}" class="carousel-btn">${content.buttonText} →</a> Inside the INNERHTML
 
                 track.appendChild(slide);
             });
